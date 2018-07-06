@@ -7,6 +7,7 @@ class RegisterPage extends Component {
     super(props);
 
     this.state = {
+      name: '',
       username: '',
       password: '',
       message: '',
@@ -22,6 +23,7 @@ class RegisterPage extends Component {
       });
     } else {
       const body = {
+        name: this.state.name,
         username: this.state.username,
         password: this.state.password,
       };
@@ -71,6 +73,17 @@ class RegisterPage extends Component {
         {this.renderAlert()}
         <form onSubmit={this.registerUser}>
           <h1>Register User</h1>
+          <div>
+            <label htmlFor="name">
+              Name:
+              <input
+                type="text"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleInputChangeFor('name')}
+              />
+            </label>
+          </div>
           <div>
             <label htmlFor="username">
               Username:

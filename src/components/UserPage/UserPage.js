@@ -29,14 +29,14 @@ class UserPage extends Component {
 
   render() {
     let content = null;
-
+    console.log(this.props.user);
     if (this.props.user.userName) {
       content = (
         <div>
           <h1
             id="welcome"
           >
-            Welcome, { this.props.user.userName }!
+            Welcome, { this.props.user.userName.name }!
           </h1>
           <button
             onClick={this.logout}

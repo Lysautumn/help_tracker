@@ -9,6 +9,7 @@ const router = express.Router();
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from database
+  console.log('this is req.user', req.user);
   res.send(req.user);
 });
 
@@ -20,9 +21,10 @@ router.post('/register', (req, res, next) => {
   
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
+  const name = req.body.name;
 
-  const queryText = 'INSERT INTO person (username, password) VALUES ($1, $2) RETURNING id';
-  pool.query(queryText, [username, password])
+  const queryText = 'INSERT INTO person (name, username, password) VALUES ($1, $2, $3) RETURNING id';
+  pool.query(queryText, [name, username, password])
     .then(() => { res.sendStatus(201); })
     .catch((err) => { next(err); });
 });
