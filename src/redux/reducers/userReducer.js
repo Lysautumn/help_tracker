@@ -5,7 +5,7 @@ const userName = (state = null, action) => {
   switch (action.type) {
     case USER_ACTIONS.SET_USER:
       let returnedUser = {
-        userName: action.user.username,
+        userName: action.user.email,
         name: action.user.name
       }
       return returnedUser || state;
