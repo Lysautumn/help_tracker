@@ -1,0 +1,10 @@
+.headerText h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.headerText {
+    background-color: #4d4d4d;
+    padding: 5px;
+    color: #ece7e7;
+}

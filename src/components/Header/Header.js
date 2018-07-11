@@ -1,7 +1,8 @@
 import React from 'react';
+import './Header.css';
 
 const Header = ({ title }) => (
-  <div className="instructions">
+  <div className="headerText">
     <div>
       <h1 className="lead">{ title }</h1>
     </div>
