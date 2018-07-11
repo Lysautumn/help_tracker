@@ -1,10 +1,16 @@
 .headerText h1 {
     font-size: 24px;
     font-weight: 700;
+    margin-left: 40px;
 }
 
 .headerText {
     background-color: #4d4d4d;
     padding: 5px;
     color: #ece7e7;
+}
+
+.faceIcon {
+    float: right;
+    margin: -50px 40px 0 0;
 }

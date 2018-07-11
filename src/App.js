@@ -6,6 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
+
 import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
@@ -14,9 +15,10 @@ import InfoPage from './components/InfoPage/InfoPage';
 
 import './styles/main.css';
 
+
 const App = () => (
   <div>
-    <Header title="Project Base" />
+    <Header title="Prime Help Tracker" />
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />
@@ -38,7 +40,6 @@ const App = () => (
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
-
       </Switch>
     </Router>
   </div>

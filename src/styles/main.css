@@ -41,12 +41,6 @@ input[type="submit"] {
     background-color: #f8f8f8;
 }
 
-.navbar {
-  background-color: #00acb0;
-  width: 100%;
-  border-radius: 0px;
-}
-
 ul {
     list-style-type: none;
     margin: 0;
