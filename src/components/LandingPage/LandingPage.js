@@ -22,7 +22,15 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
+
+
 class LandingPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      greetings: ['Hello', 'Hey', 'Ahoy', 'Greetings', 'Bonjour', 'Hey There', 'Hola', 'Aloha']
+    };
+  }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
@@ -33,8 +41,13 @@ class LandingPage extends Component {
     }
   }
 
+  getGreeting() {
+    return this.state.greetings[Math.floor(Math.random() * this.state.greetings.length)];
+  }
+
   render() {
     let content = null;
+    let greeting = this.getGreeting();
     console.log(this.props.user);
     if (this.props.user.userName) {
       content = (
@@ -42,7 +55,7 @@ class LandingPage extends Component {
           <h1
             id="welcome"
           >
-            Welcome, { this.props.user.userName.name }!
+            {greeting}, { this.props.user.userName.name }!
           </h1>
           <Link to="/add" style={styles.link}>
             <Button variant="fab" style={styles.addButton}>
