@@ -11,6 +11,7 @@ import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import LandingPage from './components/LandingPage/LandingPage';
+import AddPage from './components/AddPage/AddPage';
 
 import './styles/main.css';
 
@@ -32,6 +33,10 @@ const App = () => (
         <Route
           path="/user"
           component={LandingPage}
+        />
+        <Route
+          path="/add"
+          component={AddPage}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
