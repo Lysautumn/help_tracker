@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
+// import { triggerLogout } from '../../redux/actions/loginActions';
 
 
 const mapStateToProps = state => ({
@@ -20,10 +20,10 @@ class UserPage extends Component {
     }
   }
 
-  logout = () => {
-    this.props.dispatch(triggerLogout());
-    // this.props.history.push('home');
-  }
+  // logout = () => {
+  //   this.props.dispatch(triggerLogout());
+  //   // this.props.history.push('home');
+  // }
 
   render() {
     let content = null;
@@ -36,11 +36,11 @@ class UserPage extends Component {
           >
             Welcome, { this.props.user.userName.name }!
           </h1>
-          <button
+          {/* <button
             onClick={this.logout}
           >
             Log Out
-          </button>
+          </button> */}
         </div>
       );
     }
