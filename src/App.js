@@ -10,15 +10,14 @@ import {
 import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
-import UserPage from './components/UserPage/UserPage';
-import InfoPage from './components/InfoPage/InfoPage';
+import LandingPage from './components/LandingPage/LandingPage';
 
 import './styles/main.css';
 
 
 const App = () => (
   <div>
-    <Header title="Prime Help Tracker" />
+    <Header />
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />
@@ -32,11 +31,7 @@ const App = () => (
         />
         <Route
           path="/user"
-          component={UserPage}
-        />
-        <Route
-          path="/info"
-          component={InfoPage}
+          component={LandingPage}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
