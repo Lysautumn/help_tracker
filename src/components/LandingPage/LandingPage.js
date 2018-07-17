@@ -8,7 +8,8 @@ import Add from '@material-ui/icons/Add';
 import amber from '@material-ui/core/colors/amber';
 import grey from '@material-ui/core/colors/grey';
 
-import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
+
 
 const styles = {
   addButton: {
@@ -31,8 +32,9 @@ class LandingPage extends Component {
       greetings: ['Hello', 'Hey', 'Ahoy', 'Greetings', 'Bonjour', 'Hey There', 'Hola', 'Aloha']
     };
   }
+
   componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    this.props.dispatch({ type: EVENT_ACTIONS.GET_EVENTS });
   }
 
   componentDidUpdate() {
@@ -48,7 +50,6 @@ class LandingPage extends Component {
   render() {
     let content = null;
     let greeting = this.getGreeting();
-    console.log(this.props.user);
     if (this.props.user.userName) {
       content = (
         <div>

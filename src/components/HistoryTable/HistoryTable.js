@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './AddPage.css';
+import { Link } from 'react-router-dom';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
@@ -8,7 +12,15 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-class AddPage extends Component {
+
+
+class HistoryTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      historyList: []
+    };
+  }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
@@ -20,24 +32,16 @@ class AddPage extends Component {
   }
 
   render() {
-    let content = null;
-    console.log(this.props.user);
-    if (this.props.user.userName) {
-      content = (
-        <div>
-            <p>Add Page</p>
-        </div>
-      );
-    }
 
     return (
       <div className="contentContainer">
-        { content }
+        <Table>
+
+        </Table>
       </div>
     );
   }
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(AddPage);
-
+export default connect(mapStateToProps)(HistoryTable);
