@@ -10,6 +10,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
   user: state.user,
+  event: state.event,
 });
 
 
@@ -35,9 +36,14 @@ class HistoryTable extends Component {
 
     return (
       <div className="contentContainer">
+        <p>History Table</p>
         <Table>
-
+          <TableBody>
+          {this.props.event.eventList && this.props.event.eventList.eventName.map( (event) => {
+        return <TableRow key={event.name}><TableCell>{event.date}</TableCell><TableCell>{event.title}</TableCell><TableCell>{event.student}</TableCell><TableCell>{event.instructor}</TableCell></TableRow>})}
+          </TableBody>
         </Table>
+ 
       </div>
     );
   }

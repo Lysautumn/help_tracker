@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './LandingPage.css';
+import HistoryTable from '../HistoryTable/HistoryTable';
 
 import Button from '@material-ui/core/Button';
 import Add from '@material-ui/icons/Add';
 import amber from '@material-ui/core/colors/amber';
 import grey from '@material-ui/core/colors/grey';
 
-import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
+import { triggerGet } from '../../redux/actions/eventActions';
 
 
 const styles = {
@@ -19,10 +20,10 @@ const styles = {
     color: grey[900]
   }
 }
+
 const mapStateToProps = state => ({
   user: state.user,
 });
-
 
 
 class LandingPage extends Component {
@@ -34,7 +35,7 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch({ type: EVENT_ACTIONS.GET_EVENTS });
+    this.props.dispatch(triggerGet());
   }
 
   componentDidUpdate() {
@@ -63,8 +64,10 @@ class LandingPage extends Component {
               <Add />
             </Button>
           </Link>
-        </div>
+          <HistoryTable />
+        </div>        
       );
+
     }
 
     return (
