@@ -9,7 +9,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Delete from '@material-ui/icons/Delete';
 import More from '@material-ui/icons/More';
+import Check from '@material-ui/icons/Check';
 import red from '@material-ui/core/colors/red';
+import teal from '@material-ui/core/colors/teal';
+import amber from '@material-ui/core/colors/amber';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -26,11 +29,14 @@ const styles = {
   moreButton: {
     backgroundColor: blueGrey[50],
   },
+  checkButton: {
+      backgroundColor: amber[400],
+  },
 }
 
 
 
-class HistoryTable extends Component {
+class UpcomingTable extends Component {
   constructor(props) {
     super(props);
   }
@@ -48,24 +54,24 @@ class HistoryTable extends Component {
 
     return (
       <div className="contentContainer">
-        <p>History Table</p>
+        <p>Upcoming Table</p>
         <Table>
           <TableBody>
           {this.props.event.eventList && this.props.event.eventList.eventName.map( (event) => {
-            if (event.completed === true) {
+            if (event.completed === false) {
               return ( 
                 <TableRow key={event.id}>
                   <TableCell><Moment format="MM/DD/YYYY hh:mm a">{event.date}</Moment></TableCell>
                   <TableCell>{event.title}</TableCell>
                   <TableCell>{event.student}</TableCell>
                   <TableCell>{event.instructor}</TableCell>
-                  <TableCell></TableCell>
                   <TableCell><Button style={styles.moreButton}><More /></Button></TableCell>
+                  <TableCell><Button style={styles.checkButton}><Check /></Button></TableCell>
                   <TableCell><Button style={styles.deleteButton}><Delete /></Button></TableCell>
                 </TableRow>
               )
             }
-            })}
+          })}
           </TableBody>
         </Table>
  
@@ -75,4 +81,4 @@ class HistoryTable extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(HistoryTable);
+export default connect(mapStateToProps)(UpcomingTable);

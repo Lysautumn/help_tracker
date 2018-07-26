@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './LandingPage.css';
 import HistoryTable from '../HistoryTable/HistoryTable';
-
+import UpcomingTable from '../UpcomingTable/UpcomingTable';
 import Button from '@material-ui/core/Button';
 import Add from '@material-ui/icons/Add';
 import amber from '@material-ui/core/colors/amber';
@@ -64,6 +64,7 @@ class LandingPage extends Component {
               <Add />
             </Button>
           </Link>
+          <UpcomingTable />
           <HistoryTable />
         </div>        
       );
