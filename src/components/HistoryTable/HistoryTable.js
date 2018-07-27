@@ -31,9 +31,7 @@ const styles = {
 
 
 class HistoryTable extends Component {
-  constructor(props) {
-    super(props);
-  }
+  
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
@@ -48,7 +46,7 @@ class HistoryTable extends Component {
 
     return (
       <div className="contentContainer">
-        <p>History Table</p>
+        <h2>History</h2>
         <Table>
           <TableBody>
           {this.props.event.eventList && this.props.event.eventList.eventName.map( (event) => {
@@ -64,6 +62,8 @@ class HistoryTable extends Component {
                   <TableCell><Button style={styles.deleteButton}><Delete /></Button></TableCell>
                 </TableRow>
               )
+            } else {
+              return null;
             }
             })}
           </TableBody>

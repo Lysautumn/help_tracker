@@ -12,7 +12,6 @@ import More from '@material-ui/icons/More';
 import Check from '@material-ui/icons/Check';
 import red from '@material-ui/core/colors/red';
 import teal from '@material-ui/core/colors/teal';
-import amber from '@material-ui/core/colors/amber';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -30,16 +29,14 @@ const styles = {
     backgroundColor: blueGrey[50],
   },
   checkButton: {
-      backgroundColor: amber[400],
+      backgroundColor: teal[400],
   },
 }
 
 
 
 class UpcomingTable extends Component {
-  constructor(props) {
-    super(props);
-  }
+
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
@@ -54,7 +51,7 @@ class UpcomingTable extends Component {
 
     return (
       <div className="contentContainer">
-        <p>Upcoming Table</p>
+        <h2>Upcoming</h2>
         <Table>
           <TableBody>
           {this.props.event.eventList && this.props.event.eventList.eventName.map( (event) => {
@@ -70,11 +67,12 @@ class UpcomingTable extends Component {
                   <TableCell><Button style={styles.deleteButton}><Delete /></Button></TableCell>
                 </TableRow>
               )
+            } else {
+              return null;
             }
           })}
           </TableBody>
         </Table>
- 
       </div>
     );
   }

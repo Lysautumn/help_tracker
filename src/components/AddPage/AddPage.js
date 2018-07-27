@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './AddPage.css';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import TextField from '@material-ui/core/TextField';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -24,9 +24,9 @@ class AddPage extends Component {
     console.log(this.props.user);
     if (this.props.user.userName) {
       content = (
-        <div>
-            <p>Add Page</p>
-        </div>
+        <form>
+          <TextField />
+        </form>
       );
     }
 
