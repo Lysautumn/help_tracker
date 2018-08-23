@@ -6,7 +6,8 @@ const userName = (state = null, action) => {
     case USER_ACTIONS.SET_USER:
       let returnedUser = {
         userName: action.user.email,
-        name: action.user.name
+        name: action.user.name,
+        id: action.user.id
       }
       return returnedUser || state;
     case USER_ACTIONS.UNSET_USER:

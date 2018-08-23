@@ -27,7 +27,17 @@ router.get('/all', (req, res) => {
  * POST route
  */
 router.post('/', (req, res) => {
-
+    console.log('this is the request body', req.body);
+    const event = req.body;
+    pool.query(`INSERT into "events" 
+    ("date", "title", "instructor_id", "cohort_id", "assignment_id", "topic_id") 
+    VALUES ($1, $2, $3, $4, $5, $6);`, [event.date, event.title, event.instructor, event.cohort, event.assignment, event.topics])
+        .then(result => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log('error in POST for events', error);
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;
