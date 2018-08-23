@@ -53,9 +53,9 @@ class HistoryTable extends Component {
             if (event.completed === true) {
               return ( 
                 <TableRow key={event.id}>
-                  <TableCell><Moment format="MM/DD/YYYY hh:mm a">{event.date}</Moment></TableCell>
+                  <TableCell><Moment format="MM/DD/YYYY">{event.date}</Moment></TableCell>
                   <TableCell>{event.title}</TableCell>
-                  <TableCell>{event.student}</TableCell>
+                  <TableCell>{event.students}</TableCell>
                   <TableCell>{event.instructor}</TableCell>
                   <TableCell></TableCell>
                   <TableCell><Button style={styles.moreButton}><More /></Button></TableCell>

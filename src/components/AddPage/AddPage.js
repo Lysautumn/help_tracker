@@ -5,8 +5,11 @@ import axios from 'axios';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { SELECT_ACTIONS } from '../../redux/actions/selectActions';
 import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-// import ChipInput from 'material-ui-chip-input';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import grey from '@material-ui/core/colors/grey';
 import Button from '@material-ui/core/Button';
 import amber from '@material-ui/core/colors/amber';
@@ -17,6 +20,7 @@ import './AddPage.css';
 
 const mapStateToProps = state => ({
   user: state.user,
+  select: state.select,
 });
 
 const theme = createMuiTheme({
@@ -56,6 +60,7 @@ class AddPage extends Component {
         title: '',
         instructor: '',
         cohort: '',
+        students: '',
         assignment: '',
         topics: '',
       },
@@ -65,6 +70,7 @@ class AddPage extends Component {
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     this.props.dispatch({ type: SELECT_ACTIONS.GET_SELECTS });
+    console.log('cohort select', this.props.select)
   }
 
   componentDidUpdate() {
@@ -86,10 +92,6 @@ class AddPage extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // this.setState({
-    //   ...this.state.newEvent,
-    //   instructor: this.props.user.userName
-    // })
     console.log('button clicked', this.state.newEvent);
     this.postEvent(this.state.newEvent);
   }
@@ -112,7 +114,8 @@ class AddPage extends Component {
   render() {
     
     let content = null;
-    if (this.props.user.userName) {
+    //let selectContent = this.props.select.selectList.selects;
+    if (this.props.user.userName && this.props.select.selectList) {
       content = (
         <div>
           <h1>Add New Event</h1>
@@ -123,54 +126,65 @@ class AddPage extends Component {
           </Link>
           <form className="form">
             <MuiThemeProvider theme={theme}>
-              <TextField
-                id="date"
-                label="Date"
-                type="date"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                value={this.state.newEvent.date}
-                onChange={this.handleChangeFor('date')}
-              />
-              <Input
-                id="title"
-                placeholder="Title"
-                type="text"
-                value={this.state.newEvent.title}
-                onChange={this.handleChangeFor('title')}
-              />
-              {/* <Input
-                id="instructor"
-                placeholder="Instructor"
-                type="text"
-                value={this.state.newEvent.instructor}
-                onChange={this.handleChangeFor('instructor')}
-              /> */}
-              <Input
-                fullWidth
-                id="cohort"
-                placeholder="Cohort"
-                type="text"
-                value={this.state.newEvent.cohort}
-                onChange={this.handleChangeFor('cohort')}
-              />
-              <Input
-                fullWidth
-                id="assignment"
-                placeholder="Assignment"
-                type="text"
-                value={this.state.newEvent.assignment}
-                onChange={this.handleChangeFor('assignment')}
-              />
-              <Input
-                fullWidth
-                id="topics"
-                placeholder="Topics"
-                type="text"
-                value={this.state.newEvent.topics}
-                onChange={this.handleChangeFor('topics')}
-              />
+              <FormControl fullWidth>
+                <TextField
+                  id="date"
+                  label="Date"
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={this.state.newEvent.date}
+                  onChange={this.handleChangeFor('date')}
+                />
+              </FormControl>
+              <FormControl fullWidth>
+                <Input
+                  id="title"
+                  placeholder="Title"
+                  type="text"
+                  value={this.state.newEvent.title}
+                  onChange={this.handleChangeFor('title')}
+                  />
+              </FormControl>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="cohort">Cohort</InputLabel>
+                <Select value={this.state.newEvent.cohort} onChange={this.handleChangeFor('cohort')} inputProps={{
+                    name: 'Cohort',
+                    id: 'cohort'
+                }}>
+                  {this.props.select.selectList.selects.cohortInfo.map(cohort => {
+                    return (<MenuItem key={cohort.id} value={cohort.id}>{cohort.cohort_name}</MenuItem>)
+                  })}
+                </Select>
+              </FormControl>
+              <FormControl fullWidth>
+                <Input
+                  id="students"
+                  placeholder="Students"
+                  type="text"
+                  value={this.state.newEvent.students}
+                  onChange={this.handleChangeFor('students')}
+                />
+              </FormControl>
+              <FormControl fullWidth>
+                <Input
+                  id="assignment"
+                  placeholder="Assignment"
+                  type="text"
+                  value={this.state.newEvent.assignment}
+                  onChange={this.handleChangeFor('assignment')}
+                />
+              </FormControl>
+              <FormControl fullWidth>
+                <Input
+                  id="topics"
+                  placeholder="Topics"
+                  type="text"
+                  value={this.state.newEvent.topics}
+                  onChange={this.handleChangeFor('topics')}
+                />
+              </FormControl>
               <Button style={styles.addButton} variant="contained" type="submit" onClick={this.handleSubmit}>Add</Button>
             </MuiThemeProvider>
           </form>
