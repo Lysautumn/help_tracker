@@ -2,12 +2,40 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
-
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import grey from '@material-ui/core/colors/grey';
+import amber from '@material-ui/core/colors/amber';
+import teal from '@material-ui/core/colors/teal';
+import Button from '@material-ui/core/Button';
+import './LoginPage.css';
 
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
 });
+
+const theme = createMuiTheme({
+  palette: {
+    primary: grey,
+  },
+});
+
+const styles = {
+  loginButton: {
+    margin: '20px 20px 0px 0px',
+    backgroundColor: teal[400],
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'black',
+  },
+  registerButton: {
+    margin: '20px 20px 0px 0px',
+    backgroundColor: amber[400],
+  }
+}
 
 class LoginPage extends Component {
   constructor(props) {
@@ -64,16 +92,39 @@ class LoginPage extends Component {
     return (
       <div>
         { this.renderAlert() }
-        <form onSubmit={this.login}>
+        <form>
           <h1>Login</h1>
+          <MuiThemeProvider theme={theme}>
+            <FormControl fullWidth>
+              <Input
+                type="text"
+                placeholder="Email"
+                value={this.state.email}
+                onChange={this.handleInputChangeFor('email')}
+              />
+            </FormControl>
+            <FormControl fullWidth>
+              <Input
+                type="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.handleInputChangeFor('password')}
+              />
+            </FormControl>
+            <Button style={styles.loginButton} variant="contained" type="submit" onClick={this.login}>Log In</Button>
+            <Button style={styles.registerButton} variant="contained" type="submit"><Link style={styles.link} to="/register">Register</Link></Button>
+            
+          </MuiThemeProvider>
+        </form>
+        
+        {/* <form onSubmit={this.login}>
           <div>
             <label htmlFor="email">
               Email:
               <input
                 type="text"
                 name="email"
-                value={this.state.email}
-                onChange={this.handleInputChangeFor('email')}
+                
               />
             </label>
           </div>
@@ -96,7 +147,7 @@ class LoginPage extends Component {
             />
             <Link to="/register">Register</Link>
           </div>
-        </form>
+        </form> */}
       </div>
     );
   }

@@ -39,18 +39,6 @@ const styles = {
   }
 }
 
-class Event {
-  constructor(date, title, instructor, cohort, assignment, topics) {
-    this.date = date;
-    this.title = title;
-    this.instructor = instructor;
-    this.cohort = cohort;
-    this.assignment = assignment;
-    this.topics = topics;
-  }
-}
-
-
 class AddPage extends Component {
   constructor(props) {
     super(props);
@@ -75,7 +63,7 @@ class AddPage extends Component {
 
   componentDidUpdate() {
     if (!this.props.user.isLoading && this.props.user.userName === null) {
-      this.props.history.push('home');
+      this.props.history.push('/home');
     }
   }
 
@@ -94,6 +82,17 @@ class AddPage extends Component {
     event.preventDefault();
     console.log('button clicked', this.state.newEvent);
     this.postEvent(this.state.newEvent);
+    this.setState({
+      newEvent: {
+        date: new Date(),
+        title: '',
+        instructor: '',
+        cohort: '',
+        students: '',
+        assignment: '',
+        topics: '',
+      }
+    })
   }
 
   postEvent = newEvent => {
@@ -103,12 +102,6 @@ class AddPage extends Component {
       }).catch(error => {
         console.log('error in post', error);
       });
-  }
-
-  clearInputs = () => {
-    this.setState({
-      newEvent: new Event()
-    });
   }
 
   render() {
