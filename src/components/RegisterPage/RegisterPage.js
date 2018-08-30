@@ -1,6 +1,34 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import grey from '@material-ui/core/colors/grey';
+import amber from '@material-ui/core/colors/amber';
+import teal from '@material-ui/core/colors/teal';
+import Button from '@material-ui/core/Button';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: grey,
+  },
+});
+
+const styles = {
+  registerButton: {
+    margin: '20px 20px 0px 0px',
+    backgroundColor: teal[400],
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'black',
+  },
+  cancelButton: {
+    margin: '20px 20px 0px 0px',
+    backgroundColor: amber[400],
+  }
+}
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -8,7 +36,7 @@ class RegisterPage extends Component {
 
     this.state = {
       name: '',
-      username: '',
+      email: '',
       password: '',
       message: '',
     };
@@ -17,14 +45,14 @@ class RegisterPage extends Component {
   registerUser = (event) => {
     event.preventDefault();
 
-    if (this.state.username === '' || this.state.password === '') {
+    if (this.state.name === '' || this.state.email === '' || this.state.password === '') {
       this.setState({
-        message: 'Choose a username and password!',
+        message: 'Please fill out all fields!',
       });
     } else {
       const body = {
         name: this.state.name,
-        username: this.state.username,
+        email: this.state.email,
         password: this.state.password,
       };
 
@@ -71,49 +99,37 @@ class RegisterPage extends Component {
     return (
       <div>
         {this.renderAlert()}
-        <form onSubmit={this.registerUser}>
+        <form>
           <h1>Register User</h1>
-          <div>
-            <label htmlFor="name">
-              Name:
-              <input
+          <MuiThemeProvider theme={theme}>
+            <FormControl fullWidth>
+              <Input
                 type="text"
-                name="name"
+                placeholder="Name"
                 value={this.state.name}
                 onChange={this.handleInputChangeFor('name')}
               />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
+            
+            </FormControl>
+            <FormControl fullWidth>
+              <Input
                 type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
+                placeholder="Email"
+                value={this.state.email}
+                onChange={this.handleInputChangeFor('email')}
               />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
+            </FormControl>
+            <FormControl fullWidth>
+              <Input
                 type="password"
-                name="password"
+                placeholder="Password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
-            </label>
-          </div>
-          <div>
-            <input
-              type="submit"
-              name="submit"
-              value="Register"
-            />
-            <Link to="/home">Cancel</Link>
-          </div>
+            </FormControl>
+            <Button style={styles.registerButton} variant="contained" type="submit" onClick={this.registerUser}>Register</Button>
+            <Button style={styles.cancelButton} variant="contained"><Link to="/home" style={styles.link}>Cancel</Link></Button>
+          </MuiThemeProvider>
         </form>
       </div>
     );

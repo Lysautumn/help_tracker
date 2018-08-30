@@ -116,38 +116,6 @@ class LoginPage extends Component {
             
           </MuiThemeProvider>
         </form>
-        
-        {/* <form onSubmit={this.login}>
-          <div>
-            <label htmlFor="email">
-              Email:
-              <input
-                type="text"
-                name="email"
-                
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              type="submit"
-              name="submit"
-              value="Log In"
-            />
-            <Link to="/register">Register</Link>
-          </div>
-        </form> */}
       </div>
     );
   }
