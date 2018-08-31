@@ -105,7 +105,6 @@ class AddPage extends Component {
   render() {
     
     let content = null;
-    //let selectContent = this.props.select.selectList.selects;
     if (this.props.user.userName && this.props.select.selectList) {
       content = (
         <div>

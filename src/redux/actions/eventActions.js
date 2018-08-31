@@ -2,7 +2,9 @@ export const EVENT_ACTIONS = {
     GET_EVENTS: 'GET_EVENTS',
     REQUEST_START: 'REQUEST_START',
     REQUEST_END: 'REQUEST_END',
-    SET_EVENT: 'SET_EVENT',
+    SET_EVENTS: 'SET_EVENTS',
+    GET_EVENT_INFO: 'GET_EVENT_INFO',
+    SET_EVENT_INFO: 'SET_EVENT_INFO'
 }
 
 export const triggerGet = () => ({

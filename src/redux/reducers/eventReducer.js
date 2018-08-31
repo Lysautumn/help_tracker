@@ -3,7 +3,7 @@ import { EVENT_ACTIONS } from '../actions/eventActions';
 
 const eventList = (state = null, action) => {
   switch (action.type) {
-    case EVENT_ACTIONS.SET_EVENT:
+    case EVENT_ACTIONS.SET_EVENTS:
       let returnedEvent = {
         eventName: action.event
       }
@@ -12,6 +12,19 @@ const eventList = (state = null, action) => {
       return state;
   }
 };
+
+const eventDetails = (state = null, action) => {
+  switch (action.type) {
+    case EVENT_ACTIONS.SET_EVENT_INFO:
+    let returnedEventInfo = {
+      eventInfo: action.event
+    }
+    return returnedEventInfo || state;
+  default:
+    return state;
+  }
+}
+
 
 const isLoading = (state = false, action) => {
   switch (action.type) {
@@ -26,5 +39,6 @@ const isLoading = (state = false, action) => {
 
 export default combineReducers({
   eventList,
+  eventDetails,
   isLoading,
 });

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { SELECT_ACTIONS } from '../../redux/actions/selectActions';
+import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -58,6 +59,8 @@ class EventEditPage extends Component {
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     this.props.dispatch({ type: SELECT_ACTIONS.GET_SELECTS });
+    this.props.dispatch({ type: EVENT_ACTIONS.GET_EVENT_INFO, payload: this.props.match.params.id });
+    console.log('getting id off url', this.props.match.params.id);
   }
 
   componentDidUpdate() {
@@ -105,11 +108,10 @@ class EventEditPage extends Component {
   render() {
     
     let content = null;
-    //let selectContent = this.props.select.selectList.selects;
     if (this.props.user.userName && this.props.select.selectList) {
       content = (
         <div>
-          <h1>Add New Event</h1>
+          <h1>Edit Event</h1>
           <Link to="/user" style={styles.link}>
             <Button variant="fab" style={styles.backButton}>
               <ArrowBack />

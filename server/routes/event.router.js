@@ -9,9 +9,8 @@ router.get('/all', (req, res) => {
     pool.query(`SELECT events.id, date, title, person.name as instructor, cohort_name, assignment, topic, completed, students
 	FROM "events"
 	JOIN "person" on person.id = events.instructor_id
-	JOIN "cohorts" on cohorts.id = events.cohort_id;;`)
+	JOIN "cohorts" on cohorts.id = events.cohort_id;`)
         .then(result => {
-            console.log(result.rows);
             res.send(result.rows);
         }).catch(error => {
             console.log('Error in GET for events', error);
@@ -20,10 +19,29 @@ router.get('/all', (req, res) => {
 });
 
 /**
+ * GET for specific event information
+ */
+
+router.get('/:id', (req, res) => {
+    console.log(req.params);
+    const id = req.params.id;
+    pool.query(`SELECT events.id, date, title, person.name as instructor, cohort_name, assignment, topic, completed, students
+	FROM "events"
+	JOIN "person" on person.id = events.instructor_id
+    JOIN "cohorts" on cohorts.id = events.cohort_id
+    WHERE events.id = $1`, [id])
+        .then(result => {
+            res.send(result.rows);
+        }).catch(error => {
+            console.log('Error in GET for event details', error);
+            res.sendStatus(500);
+        })
+});
+
+/**
  * POST route
  */
 router.post('/', (req, res) => {
-    console.log('this is the request body', req.body);
     const event = req.body;
     pool.query(`INSERT into "events" 
     ("date", "title", "instructor_id", "cohort_id", "students", "assignment", "topic") 
