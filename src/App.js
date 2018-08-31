@@ -12,6 +12,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import LandingPage from './components/LandingPage/LandingPage';
 import AddPage from './components/AddPage/AddPage';
+import EventEditPage from './components/EventEditPage/EventEditPage';
 
 import './styles/main.css';
 
@@ -37,6 +38,10 @@ const App = () => (
         <Route
           path="/add"
           component={AddPage}
+        />
+        <Route
+          path="/editEvent/:id"
+          component={EventEditPage}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />

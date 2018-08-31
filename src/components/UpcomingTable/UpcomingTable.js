@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Delete from '@material-ui/icons/Delete';
-import More from '@material-ui/icons/More';
+import Edit from '@material-ui/icons/Edit';
 import Check from '@material-ui/icons/Check';
 import red from '@material-ui/core/colors/red';
 import teal from '@material-ui/core/colors/teal';
@@ -27,6 +27,10 @@ const styles = {
   },
   moreButton: {
     backgroundColor: blueGrey[50],
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'black',
   },
   checkButton: {
       backgroundColor: teal[400],
@@ -56,7 +60,7 @@ class UpcomingTable extends Component {
                   <TableCell>{event.title}</TableCell>
                   <TableCell>{event.students}</TableCell>
                   <TableCell>{event.instructor}</TableCell>
-                  <TableCell><Button style={styles.moreButton}><More /></Button></TableCell>
+                  <TableCell><Button style={styles.moreButton}><Link style={styles.link} to={`/editEvent/${event.id}`}><Edit /></Link></Button></TableCell>
                   <TableCell><Button style={styles.checkButton}><Check /></Button></TableCell>
                   <TableCell><Button style={styles.deleteButton}><Delete /></Button></TableCell>
                 </TableRow>

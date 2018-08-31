@@ -16,11 +16,11 @@ import amber from '@material-ui/core/colors/amber';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import teal from '@material-ui/core/colors/teal';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import './AddPage.css';
 
 const mapStateToProps = state => ({
   user: state.user,
   select: state.select,
+  event: state.event
 });
 
 const theme = createMuiTheme({
@@ -39,11 +39,11 @@ const styles = {
   }
 }
 
-class AddPage extends Component {
+class EventEditPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newEvent: {
+      event: {
         date: new Date(),
         title: '',
         instructor: '',
@@ -78,10 +78,10 @@ class AddPage extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log('button clicked', this.state.newEvent);
-    this.postEvent(this.state.newEvent);
+    console.log('button clicked', this.state.event);
+    this.editEvent(this.state.event);
     this.setState({
-      newEvent: {
+      event: {
         date: new Date(),
         title: '',
         instructor: '',
@@ -93,8 +93,8 @@ class AddPage extends Component {
     })
   }
 
-  postEvent = newEvent => {
-    axios.post('/events', newEvent)
+  editEvent = editedEvent => {
+    axios.post('/events', editedEvent)
       .then(response => {
         console.log('response from post', response);
       }).catch(error => {
@@ -125,7 +125,7 @@ class AddPage extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  value={this.state.newEvent.date}
+                  value={this.state.event.date}
                   onChange={this.handleChangeFor('date')}
                 />
               </FormControl>
@@ -134,13 +134,13 @@ class AddPage extends Component {
                   id="title"
                   placeholder="Title"
                   type="text"
-                  value={this.state.newEvent.title}
+                  value={this.state.event.title}
                   onChange={this.handleChangeFor('title')}
                   />
               </FormControl>
               <FormControl fullWidth>
                 <InputLabel htmlFor="cohort">Cohort</InputLabel>
-                <Select value={this.state.newEvent.cohort} onChange={this.handleChangeFor('cohort')} inputProps={{
+                <Select value={this.state.event.cohort} onChange={this.handleChangeFor('cohort')} inputProps={{
                     name: 'Cohort',
                     id: 'cohort'
                 }}>
@@ -154,7 +154,7 @@ class AddPage extends Component {
                   id="students"
                   placeholder="Students"
                   type="text"
-                  value={this.state.newEvent.students}
+                  value={this.state.event.students}
                   onChange={this.handleChangeFor('students')}
                 />
               </FormControl>
@@ -163,7 +163,7 @@ class AddPage extends Component {
                   id="assignment"
                   placeholder="Assignment"
                   type="text"
-                  value={this.state.newEvent.assignment}
+                  value={this.state.event.assignment}
                   onChange={this.handleChangeFor('assignment')}
                 />
               </FormControl>
@@ -172,7 +172,7 @@ class AddPage extends Component {
                   id="topics"
                   placeholder="Topics"
                   type="text"
-                  value={this.state.newEvent.topics}
+                  value={this.state.event.topics}
                   onChange={this.handleChangeFor('topics')}
                 />
               </FormControl>
@@ -192,5 +192,5 @@ class AddPage extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(AddPage);
+export default connect(mapStateToProps)(EventEditPage);
 

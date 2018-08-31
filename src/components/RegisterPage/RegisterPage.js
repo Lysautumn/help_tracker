@@ -8,6 +8,7 @@ import grey from '@material-ui/core/colors/grey';
 import amber from '@material-ui/core/colors/amber';
 import teal from '@material-ui/core/colors/teal';
 import Button from '@material-ui/core/Button';
+import './RegisterPage.css';
 
 const theme = createMuiTheme({
   palette: {
