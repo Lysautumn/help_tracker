@@ -6,10 +6,11 @@ const router = express.Router();
  * GET for all event information
  */
 router.get('/all', (req, res) => {
-    pool.query(`SELECT events.id, date, title, person.name as instructor, cohort_name, assignment, topic, completed, students
+    const queryText = `SELECT events.id, date, title, person.name as instructor, cohort_name, assignment, topic, completed, students
 	FROM "events"
 	JOIN "person" on person.id = events.instructor_id
-	JOIN "cohorts" on cohorts.id = events.cohort_id;`)
+	JOIN "cohorts" on cohorts.id = events.cohort_id;`;
+    pool.query(queryText)
         .then(result => {
             res.send(result.rows);
         }).catch(error => {
@@ -23,13 +24,13 @@ router.get('/all', (req, res) => {
  */
 
 router.get('/:id', (req, res) => {
-    console.log(req.params);
     const id = req.params.id;
-    pool.query(`SELECT events.id, date, title, person.name as instructor, cohort_name, assignment, topic, completed, students
+    const queryText = `SELECT events.id, date, title, person.name as instructor, cohort_name, assignment, topic, completed, students
 	FROM "events"
 	JOIN "person" on person.id = events.instructor_id
     JOIN "cohorts" on cohorts.id = events.cohort_id
-    WHERE events.id = $1`, [id])
+    WHERE events.id = $1`;
+    pool.query(queryText, [id])
         .then(result => {
             res.send(result.rows);
         }).catch(error => {
@@ -43,13 +44,47 @@ router.get('/:id', (req, res) => {
  */
 router.post('/', (req, res) => {
     const event = req.body;
-    pool.query(`INSERT into "events" 
+    const queryText = `INSERT into "events" 
     ("date", "title", "instructor_id", "cohort_id", "students", "assignment", "topic") 
-    VALUES ($1, $2, $3, $4, $5, $6, $7);`, [event.date, event.title, event.instructor, event.cohort, event.students, event.assignment, event.topics])
+    VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+    pool.query(queryText, [event.date, event.title, event.instructor, event.cohort, event.students, event.assignment, event.topics])
         .then(result => {
             res.sendStatus(200);
         }).catch(error => {
             console.log('error in POST for events', error);
+            res.sendStatus(500);
+        })
+});
+
+/**
+ * PUT route
+ */
+router.put('/:id', (req, res) => {
+    const event = req.body;
+    const eventId = req.params.id;
+    const queryText = `UPDATE "events" 
+    SET "title" = $1, "students" = $2, "assignment" = $3, "topic" = $4 
+    WHERE id = $5;`
+    pool.query(queryText, [event.title, event.students, event.assignment, event.topics, eventId])
+        .then(result => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log('error in event PUT', error);
+            res.sendStatus(500);
+        })
+});
+
+/**
+ * DELETE route
+ */
+router.delete('/:id', (req, res) => {
+    const eventId = req.params.id;
+    const queryText = `DELETE FROM "events" WHERE id = $1`;
+    pool.query(queryText, eventId)
+        .then(result => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log('error in event DELETE', error);
             res.sendStatus(500);
         })
 });

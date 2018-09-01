@@ -25,7 +25,7 @@ function* getSelects() {
 }
 
 function* selectSaga() {
-    yield takeLatest(SELECT_ACTIONS.GET_SELECTS, getSelects);
+    yield takeLatest(SELECT_ACTIONS.FETCH_SELECTS, getSelects);
 }
 
 export default selectSaga;

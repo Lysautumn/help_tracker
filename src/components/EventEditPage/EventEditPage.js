@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
 import axios from 'axios';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { SELECT_ACTIONS } from '../../redux/actions/selectActions';
@@ -62,8 +63,8 @@ class EventEditPage extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch({ type: SELECT_ACTIONS.GET_SELECTS });
-    this.props.dispatch({ type: EVENT_ACTIONS.GET_EVENT_INFO, payload: this.props.match.params.id });
+    this.props.dispatch({ type: SELECT_ACTIONS.FETCH_SELECTS });
+    this.props.dispatch({ type: EVENT_ACTIONS.FETCH_EVENT_INFO, payload: this.props.match.params.id });
   }
 
   componentDidUpdate(prevProps) {
@@ -103,21 +104,12 @@ class EventEditPage extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.editEvent(this.state.event);
-    // this.setState({
-    //   event: {
-    //     date: new Date(),
-    //     title: '',
-    //     instructor: '',
-    //     cohort: '',
-    //     students: '',
-    //     assignment: '',
-    //     topics: '',
-    //   }
-    // })
+    this.props.history.push('/user');
   }
 
   editEvent = editedEvent => {
-    axios.post('/events', editedEvent)
+    let id = this.props.match.params.id;
+    axios.put(`/events/${id}`, editedEvent)
       .then(response => {
         console.log('response from post', response);
       }).catch(error => {
@@ -131,7 +123,7 @@ class EventEditPage extends Component {
     if (this.props.user.userName && this.props.select.selectList && this.props.event.eventDetails) {
       content = (
         <div>
-          <h1>Edit Event</h1>
+          <h1>Editing {this.state.event.title}, <Moment format="MM/DD/YYYY">{this.state.event.date}</Moment></h1>
           <Link to="/user" style={styles.link}>
             <Button variant="fab" style={styles.backButton}>
               <ArrowBack />
@@ -139,18 +131,6 @@ class EventEditPage extends Component {
           </Link>
           <form className="form">
             <MuiThemeProvider theme={theme}>
-              <FormControl fullWidth>
-                <TextField
-                  id="date"
-                  label="Date"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  value={this.state.event.date}
-                  onChange={this.handleChangeFor('date')}
-                />
-              </FormControl>
               <FormControl fullWidth>
                 <Input
                   id="title"
@@ -198,7 +178,7 @@ class EventEditPage extends Component {
                 />
               </FormControl>
               <Button style={styles.addButton} variant="contained" type="submit" onClick={this.handleSubmit}>Save</Button>
-              <Button style={styles.deleteButton} variant="contained" type="submit" onClick={this.handleSubmit}>Delete</Button>
+              <Button style={styles.deleteButton} variant="contained" type="submit" onClick={this.handleDelete}>Delete</Button>
             </MuiThemeProvider>
           </form>
         </div>

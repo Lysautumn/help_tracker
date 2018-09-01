@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { SELECT_ACTIONS } from '../../redux/actions/selectActions';
 import TextField from '@material-ui/core/TextField';
@@ -57,7 +57,7 @@ class AddPage extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch({ type: SELECT_ACTIONS.GET_SELECTS });
+    this.props.dispatch({ type: SELECT_ACTIONS.FETCH_SELECTS });
   }
 
   componentDidUpdate() {
@@ -76,8 +76,7 @@ class AddPage extends Component {
     })
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
+  handleSubmit = () => {
     console.log('button clicked', this.state.newEvent);
     this.postEvent(this.state.newEvent);
     this.setState({
@@ -93,14 +92,19 @@ class AddPage extends Component {
     })
   }
 
-  postEvent = newEvent => {
-    axios.post('/events', newEvent)
-      .then(response => {
-        console.log('response from post', response);
-      }).catch(error => {
-        console.log('error in post', error);
-      });
+  postEvent = () => {
+    this.props.dispatch({type:EVENT_ACTIONS.CREATE_EVENT, payload: this.state.newEvent});
+    this.props.history.push('/user');
   }
+
+  // postEvent = newEvent => {
+  //   axios.post('/events', newEvent)
+  //     .then(response => {
+  //       console.log('response from post', response);
+  //     }).catch(error => {
+  //       console.log('error in post', error);
+  //     });
+  // }
 
   render() {
     

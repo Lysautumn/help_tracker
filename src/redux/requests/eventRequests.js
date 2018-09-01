@@ -23,3 +23,11 @@ export function callGetEventInfo(eventId) {
             throw error.response || error;
         });
 }
+
+export function callCreateNewEvent(event) {
+    return axios.post('events', event)
+        .then(response => response.data)
+        .cathc(error => {
+            throw error.response || error;
+        });
+}
