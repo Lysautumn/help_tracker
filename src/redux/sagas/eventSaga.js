@@ -25,7 +25,6 @@ function* getEvents() {
 }
 
 function* getEventInfo(eventId) {
-    console.log('event id', eventId);
     try{
         yield put({
             type: EVENT_ACTIONS.REQUEST_START

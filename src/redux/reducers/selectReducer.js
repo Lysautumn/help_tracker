@@ -17,7 +17,7 @@ const isLoading = (state = false, action) => {
   switch (action.type) {
     case SELECT_ACTIONS.REQUEST_START:
       return true;
-    case SELECT_ACTIONS.REQUEST_DONE:
+    case SELECT_ACTIONS.REQUEST_END:
       return false;
     default:
       return state;

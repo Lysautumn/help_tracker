@@ -7,13 +7,13 @@ import { SELECT_ACTIONS } from '../../redux/actions/selectActions';
 import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import grey from '@material-ui/core/colors/grey';
 import Button from '@material-ui/core/Button';
 import amber from '@material-ui/core/colors/amber';
+import red from '@material-ui/core/colors/red';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import teal from '@material-ui/core/colors/teal';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -21,7 +21,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const mapStateToProps = state => ({
   user: state.user,
   select: state.select,
-  event: state.event
+  event: state.event,
 });
 
 const theme = createMuiTheme({
@@ -35,8 +35,12 @@ const styles = {
     backgroundColor: amber[400],
   },
   addButton: {
-    margin: '20px 0px 0px 0px',
+    margin: '20px 10px 0px 0px',
     backgroundColor: teal[400],
+  },
+  deleteButton: {
+    margin: '20px 0px 0px 10px',
+    backgroundColor: red[400],
   }
 }
 
@@ -45,7 +49,7 @@ class EventEditPage extends Component {
     super(props);
     this.state = {
       event: {
-        date: new Date(),
+        date: '',
         title: '',
         instructor: '',
         cohort: '',
@@ -53,26 +57,43 @@ class EventEditPage extends Component {
         assignment: '',
         topics: '',
       },
-    };
+    }
   }
 
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     this.props.dispatch({ type: SELECT_ACTIONS.GET_SELECTS });
     this.props.dispatch({ type: EVENT_ACTIONS.GET_EVENT_INFO, payload: this.props.match.params.id });
-    console.log('getting id off url', this.props.match.params.id);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (!this.props.user.isLoading && this.props.user.userName === null) {
       this.props.history.push('/home');
     }
+    if (this.props.event.eventDetails !== prevProps.event.eventDetails) {
+        this.setInitialState();
+    }
+  }
+
+  setInitialState = () => {
+      let currentEvent = this.props.event.eventDetails.eventInfo[0];
+      this.setState({
+        event: {
+            date: currentEvent.date,
+            title: currentEvent.title,
+            instructor: currentEvent.instructor,
+            cohort: currentEvent.cohort_name,
+            students: currentEvent.students,
+            assignment: currentEvent.assignment,
+            topics: currentEvent.topic,
+          },
+      })
   }
 
   handleChangeFor = propertyName => event => {
     this.setState({
-      newEvent: {
-        ...this.state.newEvent,
+      event: {
+        ...this.state.event,
         instructor: this.props.user.userName.id,
         [propertyName]: event.target.value,
       }
@@ -81,19 +102,18 @@ class EventEditPage extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log('button clicked', this.state.event);
     this.editEvent(this.state.event);
-    this.setState({
-      event: {
-        date: new Date(),
-        title: '',
-        instructor: '',
-        cohort: '',
-        students: '',
-        assignment: '',
-        topics: '',
-      }
-    })
+    // this.setState({
+    //   event: {
+    //     date: new Date(),
+    //     title: '',
+    //     instructor: '',
+    //     cohort: '',
+    //     students: '',
+    //     assignment: '',
+    //     topics: '',
+    //   }
+    // })
   }
 
   editEvent = editedEvent => {
@@ -108,7 +128,7 @@ class EventEditPage extends Component {
   render() {
     
     let content = null;
-    if (this.props.user.userName && this.props.select.selectList) {
+    if (this.props.user.userName && this.props.select.selectList && this.props.event.eventDetails) {
       content = (
         <div>
           <h1>Edit Event</h1>
@@ -141,8 +161,7 @@ class EventEditPage extends Component {
                   />
               </FormControl>
               <FormControl fullWidth>
-                <InputLabel htmlFor="cohort">Cohort</InputLabel>
-                <Select value={this.state.event.cohort} onChange={this.handleChangeFor('cohort')} inputProps={{
+                <Select renderValue={value => `${this.state.event.cohort}`} value={this.state.event.cohort} readOnly inputProps={{
                     name: 'Cohort',
                     id: 'cohort'
                 }}>
@@ -178,7 +197,8 @@ class EventEditPage extends Component {
                   onChange={this.handleChangeFor('topics')}
                 />
               </FormControl>
-              <Button style={styles.addButton} variant="contained" type="submit" onClick={this.handleSubmit}>Add</Button>
+              <Button style={styles.addButton} variant="contained" type="submit" onClick={this.handleSubmit}>Save</Button>
+              <Button style={styles.deleteButton} variant="contained" type="submit" onClick={this.handleSubmit}>Delete</Button>
             </MuiThemeProvider>
           </form>
         </div>

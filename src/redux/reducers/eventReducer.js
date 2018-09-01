@@ -17,7 +17,7 @@ const eventDetails = (state = null, action) => {
   switch (action.type) {
     case EVENT_ACTIONS.SET_EVENT_INFO:
     let returnedEventInfo = {
-      eventInfo: action.event
+      eventInfo: action.eventInfo
     }
     return returnedEventInfo || state;
   default:
@@ -30,7 +30,7 @@ const isLoading = (state = false, action) => {
   switch (action.type) {
     case EVENT_ACTIONS.REQUEST_START:
       return true;
-    case EVENT_ACTIONS.REQUEST_DONE:
+    case EVENT_ACTIONS.REQUEST_END:
       return false;
     default:
       return state;
