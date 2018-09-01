@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
-import axios from 'axios';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { SELECT_ACTIONS } from '../../redux/actions/selectActions';
 import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
-import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
@@ -49,6 +47,7 @@ class EventEditPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: this.props.match.params.id,
       event: {
         date: '',
         title: '',
@@ -101,20 +100,20 @@ class EventEditPage extends Component {
     })
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
-    this.editEvent(this.state.event);
+  handleSubmit = () => {
+    this.props.dispatch({
+      type: EVENT_ACTIONS.UPDATE_EVENT,
+      payload: this.state,
+    });
     this.props.history.push('/user');
   }
 
-  editEvent = editedEvent => {
-    let id = this.props.match.params.id;
-    axios.put(`/events/${id}`, editedEvent)
-      .then(response => {
-        console.log('response from post', response);
-      }).catch(error => {
-        console.log('error in post', error);
-      });
+  handleDelete = () => {
+    this.props.dispatch({
+      type: EVENT_ACTIONS.DELETE_EVENT,
+      payload: this.state.id
+    });
+    this.props.history.push('/user');
   }
 
   render() {
@@ -177,8 +176,8 @@ class EventEditPage extends Component {
                   onChange={this.handleChangeFor('topics')}
                 />
               </FormControl>
-              <Button style={styles.addButton} variant="contained" type="submit" onClick={this.handleSubmit}>Save</Button>
-              <Button style={styles.deleteButton} variant="contained" type="submit" onClick={this.handleDelete}>Delete</Button>
+              <Button style={styles.addButton} variant="contained" onClick={this.handleSubmit}>Save</Button>
+              <Button style={styles.deleteButton} variant="contained" onClick={this.handleDelete}>Delete</Button>
             </MuiThemeProvider>
           </form>
         </div>

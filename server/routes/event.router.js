@@ -9,7 +9,8 @@ router.get('/all', (req, res) => {
     const queryText = `SELECT events.id, date, title, person.name as instructor, cohort_name, assignment, topic, completed, students
 	FROM "events"
 	JOIN "person" on person.id = events.instructor_id
-	JOIN "cohorts" on cohorts.id = events.cohort_id;`;
+    JOIN "cohorts" on cohorts.id = events.cohort_id
+    ORDER BY date`;
     pool.query(queryText)
         .then(result => {
             res.send(result.rows);
@@ -60,7 +61,7 @@ router.post('/', (req, res) => {
  * PUT route
  */
 router.put('/:id', (req, res) => {
-    const event = req.body;
+    const event = req.body.event;
     const eventId = req.params.id;
     const queryText = `UPDATE "events" 
     SET "title" = $1, "students" = $2, "assignment" = $3, "topic" = $4 
@@ -80,7 +81,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     const eventId = req.params.id;
     const queryText = `DELETE FROM "events" WHERE id = $1`;
-    pool.query(queryText, eventId)
+    pool.query(queryText, [eventId])
         .then(result => {
             res.sendStatus(200);
         }).catch(error => {

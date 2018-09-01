@@ -6,6 +6,8 @@ export const EVENT_ACTIONS = {
     FETCH_EVENT_INFO: 'FETCH_EVENT_INFO',
     SET_EVENT_INFO: 'SET_EVENT_INFO',
     CREATE_EVENT: 'CREATE_EVENT',
+    UPDATE_EVENT: 'UPDATE_EVENT',
+    DELETE_EVENT: 'DELETE_EVENT',
 }
 
 export const triggerGet = () => ({

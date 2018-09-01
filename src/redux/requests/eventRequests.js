@@ -1,11 +1,7 @@
 import axios from 'axios';
 
 export function callGetEvents() {
-    const config = {
-        headers: { 'Content-Type': 'application/json' },
-    };
-
-    return axios.get('events/all', config)
+    return axios.get('events/all')
         .then(response => response.data)
         .catch(error => {
             throw error.response || error;
@@ -13,11 +9,7 @@ export function callGetEvents() {
 }
 
 export function callGetEventInfo(eventId) {
-    const config = {
-        headers: { 'Content-Type': 'application/json' },
-    };
-
-    return axios.get(`events/${eventId}`, config)
+    return axios.get(`events/${eventId}`)
         .then(response => response.data)
         .catch(error => {
             throw error.response || error;
@@ -27,7 +19,23 @@ export function callGetEventInfo(eventId) {
 export function callCreateNewEvent(event) {
     return axios.post('events', event)
         .then(response => response.data)
-        .cathc(error => {
+        .catch(error => {
+            throw error.response || error;
+        });
+}
+
+export function callUpdateEvent(updatedEvent) {
+    return axios.put(`events/${updatedEvent.id}`, updatedEvent)
+        .then(response => response.data)
+        .catch(error => {
+            throw error.response || error;
+        });
+}
+
+export function callDeleteEvent(eventId) {
+    return axios.delete(`events/${eventId}`)
+        .then(response => response.data)
+        .catch(error => {
             throw error.response || error;
         });
 }

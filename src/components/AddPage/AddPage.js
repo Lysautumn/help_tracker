@@ -97,15 +97,6 @@ class AddPage extends Component {
     this.props.history.push('/user');
   }
 
-  // postEvent = newEvent => {
-  //   axios.post('/events', newEvent)
-  //     .then(response => {
-  //       console.log('response from post', response);
-  //     }).catch(error => {
-  //       console.log('error in post', error);
-  //     });
-  // }
-
   render() {
     
     let content = null;
