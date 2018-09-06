@@ -13,6 +13,7 @@ import RegisterPage from './components/RegisterPage/RegisterPage';
 import LandingPage from './components/LandingPage/LandingPage';
 import AddPage from './components/AddPage/AddPage';
 import EventEditPage from './components/EventEditPage/EventEditPage';
+import SubmitDetailsPage from './components/SubmitDetailsPage/SubmitDetailsPage';
 
 import './styles/main.css';
 
@@ -42,6 +43,10 @@ const App = () => (
         <Route
           path="/editEvent/:id"
           component={EventEditPage}
+        />
+        <Route
+          path="/submitEvent/:id"
+          component={SubmitDetailsPage}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />

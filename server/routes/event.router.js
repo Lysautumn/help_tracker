@@ -61,12 +61,13 @@ router.post('/', (req, res) => {
  * PUT route
  */
 router.put('/:id', (req, res) => {
+    console.log(req.body.event);
     const event = req.body.event;
     const eventId = req.params.id;
     const queryText = `UPDATE "events" 
-    SET "title" = $1, "students" = $2, "assignment" = $3, "topic" = $4 
-    WHERE id = $5;`
-    pool.query(queryText, [event.title, event.students, event.assignment, event.topics, eventId])
+    SET "title" = $1, "students" = $2, "assignment" = $3, "topic" = $4, "notes" = $5, "completed" = $6
+    WHERE id = $7;`
+    pool.query(queryText, [event.title, event.students, event.assignment, event.topics, event.notes, event.completed, eventId])
         .then(result => {
             res.sendStatus(200);
         }).catch(error => {

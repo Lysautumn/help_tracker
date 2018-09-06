@@ -12,7 +12,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import grey from '@material-ui/core/colors/grey';
 import Button from '@material-ui/core/Button';
 import amber from '@material-ui/core/colors/amber';
-import red from '@material-ui/core/colors/red';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import teal from '@material-ui/core/colors/teal';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -33,17 +32,13 @@ const styles = {
   backButton: {
     backgroundColor: amber[400],
   },
-  addButton: {
+  submitButton: {
     margin: '20px 10px 0px 0px',
     backgroundColor: teal[400],
-  },
-  deleteButton: {
-    margin: '20px 0px 0px 10px',
-    backgroundColor: red[400],
   }
 }
 
-class EventEditPage extends Component {
+class SubmitDetailsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,7 +83,6 @@ class EventEditPage extends Component {
             students: currentEvent.students,
             assignment: currentEvent.assignment,
             topics: currentEvent.topic,
-            notes: '',
             completed: false,
           },
       })
@@ -99,6 +93,7 @@ class EventEditPage extends Component {
       event: {
         ...this.state.event,
         instructor: this.props.user.userName.id,
+        completed: true,
         [propertyName]: event.target.value,
       }
     })
@@ -112,21 +107,13 @@ class EventEditPage extends Component {
     this.props.history.push('/user');
   }
 
-  handleDelete = () => {
-    this.props.dispatch({
-      type: EVENT_ACTIONS.DELETE_EVENT,
-      payload: this.state.id
-    });
-    this.props.history.push('/user');
-  }
-
   render() {
     
     let content = null;
     if (this.props.user.userName && this.props.select.selectList && this.props.event.eventDetails) {
       content = (
         <div>
-          <h1>Editing {this.state.event.title}, <Moment format="MM/DD/YYYY">{this.state.event.date}</Moment></h1>
+          <h1>Completing {this.state.event.title}, <Moment format="MM/DD/YYYY">{this.state.event.date}</Moment></h1>
           <Link to="/user" style={styles.link}>
             <Button variant="fab" style={styles.backButton}>
               <ArrowBack />
@@ -180,8 +167,18 @@ class EventEditPage extends Component {
                   onChange={this.handleChangeFor('topics')}
                 />
               </FormControl>
-              <Button style={styles.addButton} variant="contained" onClick={this.handleSubmit}>Save</Button>
-              <Button style={styles.deleteButton} variant="contained" onClick={this.handleDelete}>Delete</Button>
+              <FormControl fullWidth>
+                <Input
+                  multiline
+                  rows="5"
+                  id="notes"
+                  placeholder="Notes"
+                  type="text"
+                  value={this.state.event.notes}
+                  onChange={this.handleChangeFor('notes')}
+                  />
+              </FormControl>
+              <Button style={styles.submitButton} variant="contained" onClick={this.handleSubmit}>Submit</Button>
             </MuiThemeProvider>
           </form>
         </div>
@@ -197,5 +194,5 @@ class EventEditPage extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(EventEditPage);
+export default connect(mapStateToProps)(SubmitDetailsPage);
 

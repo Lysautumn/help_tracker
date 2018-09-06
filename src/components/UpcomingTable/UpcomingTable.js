@@ -61,7 +61,7 @@ class UpcomingTable extends Component {
                   <TableCell>{event.students}</TableCell>
                   <TableCell>{event.instructor}</TableCell>
                   <TableCell><Link style={styles.link} to={`/editEvent/${event.id}`}><Button style={styles.moreButton}><Edit /></Button></Link></TableCell>
-                  <TableCell><Button style={styles.checkButton}><Check /></Button></TableCell>
+                  <TableCell><Link style={styles.link} to={`/submitEvent/${event.id}`}><Button style={styles.checkButton}><Check /></Button></Link></TableCell>
                   <TableCell><Button style={styles.deleteButton}><Delete /></Button></TableCell>
                 </TableRow>
               )
