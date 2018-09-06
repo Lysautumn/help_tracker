@@ -77,7 +77,6 @@ class AddPage extends Component {
   }
 
   handleSubmit = () => {
-    console.log('button clicked', this.state.newEvent);
     this.postEvent(this.state.newEvent);
     this.setState({
       newEvent: {
