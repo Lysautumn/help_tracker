@@ -13,7 +13,8 @@ import Check from '@material-ui/icons/Check';
 import red from '@material-ui/core/colors/red';
 import teal from '@material-ui/core/colors/teal';
 import blueGrey from '@material-ui/core/colors/blueGrey';
-
+// import DeleteButton from '../DeleteButton/DeleteButton';
+import { EVENT_ACTIONS, triggerGet } from '../../redux/actions/eventActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
@@ -45,6 +46,15 @@ class UpcomingTable extends Component {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
 
+  handleDelete = (event, selectedEvent) => {
+    event.preventDefault();
+    this.props.dispatch({
+      type: EVENT_ACTIONS.DELETE_EVENT,
+      payload: selectedEvent.id,
+    });
+    this.props.dispatch(triggerGet());
+  }
+
   render() {
 
     return (
@@ -62,7 +72,7 @@ class UpcomingTable extends Component {
                   <TableCell>{event.instructor}</TableCell>
                   <TableCell><Link style={styles.link} to={`/editEvent/${event.id}`}><Button style={styles.moreButton}><Edit /></Button></Link></TableCell>
                   <TableCell><Link style={styles.link} to={`/submitEvent/${event.id}`}><Button style={styles.checkButton}><Check /></Button></Link></TableCell>
-                  <TableCell><Button style={styles.deleteButton}><Delete /></Button></TableCell>
+                  <TableCell><Button style={styles.deleteButton} onClick={(e) => this.handleDelete(e, event)}><Delete /></Button></TableCell>
                 </TableRow>
               )
             } else {

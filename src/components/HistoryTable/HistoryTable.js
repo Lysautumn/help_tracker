@@ -11,7 +11,8 @@ import Delete from '@material-ui/icons/Delete';
 import More from '@material-ui/icons/More';
 import red from '@material-ui/core/colors/red';
 import blueGrey from '@material-ui/core/colors/blueGrey';
-
+// import DeleteButton from '../DeleteButton/DeleteButton';
+import { EVENT_ACTIONS, triggerGet } from '../../redux/actions/eventActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
@@ -36,6 +37,15 @@ class HistoryTable extends Component {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
 
+  handleDelete = (event, selectedEvent) => {
+    event.preventDefault();
+    this.props.dispatch({
+      type: EVENT_ACTIONS.DELETE_EVENT,
+      payload: selectedEvent.id
+    });
+    this.props.dispatch(triggerGet());
+  }
+
   render() {
 
     return (
@@ -53,7 +63,7 @@ class HistoryTable extends Component {
                   <TableCell>{event.instructor}</TableCell>
                   <TableCell></TableCell>
                   <TableCell><Button style={styles.moreButton}><More /></Button></TableCell>
-                  <TableCell><Button style={styles.deleteButton}><Delete /></Button></TableCell>
+                  <TableCell><Button style={styles.deleteButton} onClick={(e) => this.handleDelete(e, event)}><Delete /></Button></TableCell>
                 </TableRow>
               )
             } else {

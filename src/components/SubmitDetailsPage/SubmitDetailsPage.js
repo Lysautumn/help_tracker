@@ -76,6 +76,7 @@ class SubmitDetailsPage extends Component {
       let currentEvent = this.props.event.eventDetails.eventInfo[0];
       this.setState({
         event: {
+          ...this.state.event,
             date: currentEvent.date,
             title: currentEvent.title,
             instructor: currentEvent.instructor,
@@ -83,7 +84,6 @@ class SubmitDetailsPage extends Component {
             students: currentEvent.students,
             assignment: currentEvent.assignment,
             topics: currentEvent.topic,
-            completed: false,
           },
       })
   }
@@ -93,10 +93,20 @@ class SubmitDetailsPage extends Component {
       event: {
         ...this.state.event,
         instructor: this.props.user.userName.id,
-        completed: true,
         [propertyName]: event.target.value,
       }
     })
+  }
+
+  handleComplete = () => {
+    this.setState({
+      event: {
+        ...this.state.event,
+        completed: true,
+      }
+    },
+    this.handleSubmit
+    )
   }
 
   handleSubmit = () => {
@@ -178,7 +188,7 @@ class SubmitDetailsPage extends Component {
                   onChange={this.handleChangeFor('notes')}
                   />
               </FormControl>
-              <Button style={styles.submitButton} variant="contained" onClick={this.handleSubmit}>Submit</Button>
+              <Button style={styles.submitButton} variant="contained" onClick={this.handleComplete}>Submit</Button>
             </MuiThemeProvider>
           </form>
         </div>

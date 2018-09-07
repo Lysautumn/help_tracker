@@ -16,6 +16,7 @@ import red from '@material-ui/core/colors/red';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import teal from '@material-ui/core/colors/teal';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+// import DeleteButton from '../DeleteButton/DeleteButton';
 
 const mapStateToProps = state => ({
   user: state.user,
