@@ -46,6 +46,7 @@ class Header extends Component {
 
   logout = () => {
     this.props.dispatch(triggerLogout());
+    this.handleClose();
   };
 
   render() {
