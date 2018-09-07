@@ -26,7 +26,7 @@ router.get('/all', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const id = req.params.id;
-    const queryText = `SELECT events.id, date, title, person.name as instructor, cohort_name, assignment, topic, completed, students
+    const queryText = `SELECT events.id, date, title, person.name as instructor, cohort_name, assignment, topic, completed, students, notes
 	FROM "events"
 	JOIN "person" on person.id = events.instructor_id
     JOIN "cohorts" on cohorts.id = events.cohort_id

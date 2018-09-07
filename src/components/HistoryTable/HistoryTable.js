@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -26,6 +26,10 @@ const styles = {
   },
   moreButton: {
     backgroundColor: blueGrey[50],
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'black',
   },
 }
 
@@ -62,7 +66,7 @@ class HistoryTable extends Component {
                   <TableCell>{event.students}</TableCell>
                   <TableCell>{event.instructor}</TableCell>
                   <TableCell></TableCell>
-                  <TableCell><Button style={styles.moreButton}><More /></Button></TableCell>
+                  <TableCell><Link style={styles.link} to={`/historyDetail/${event.id}`}><Button style={styles.moreButton}><More /></Button></Link></TableCell>
                   <TableCell><Button style={styles.deleteButton} onClick={(e) => this.handleDelete(e, event)}><Delete /></Button></TableCell>
                 </TableRow>
               )
