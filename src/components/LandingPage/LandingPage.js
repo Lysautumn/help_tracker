@@ -55,9 +55,7 @@ class LandingPage extends Component {
     if (this.props.user.userName) {
       content = (
         <div>
-          <h1
-            id="welcome"
-          >
+          <h1 id="welcome">
             {greeting}, { this.props.user.userName.name }!
           </h1>
           <Link to="/add" style={styles.link}>

@@ -1,6 +1,4 @@
 .headerText h1 {
-    font-size: 24px;
-    font-weight: 700;
     margin-left: 40px;
 }
 
@@ -12,5 +10,5 @@
 
 .faceIcon {
     float: right;
-    margin: -50px 40px 0 0;
+    margin: -80px 60px 0 0;
 }

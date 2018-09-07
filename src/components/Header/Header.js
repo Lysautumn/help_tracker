@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 import './Header.css';
+import logo from './logo.png';
 import Avatar from '@material-ui/core/Avatar';
 import Face from '@material-ui/icons/Face';
 import teal from '@material-ui/core/colors/teal';
@@ -12,7 +13,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 const styles = {
   tealAvatar: {
     backgroundColor: teal[400],
-  }
+  },
+  logo: {
+    height: '80px',
+  },
 };
 
 const mapStateToProps = state => ({
@@ -55,7 +59,7 @@ class Header extends Component {
 
     return(
       <div className="headerText">
-        <h1>Tracker</h1>
+        <h1><img style={styles.logo} src={logo} alt="Logo"/></h1>
         <Avatar className="faceIcon" style={styles.tealAvatar} aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup="true" onClick={this.handleClick}>
           <Face />
         </Avatar>
