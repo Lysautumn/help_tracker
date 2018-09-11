@@ -61,7 +61,6 @@ router.post('/', (req, res) => {
  * PUT route
  */
 router.put('/:id', (req, res) => {
-    console.log(req.body.event);
     const event = req.body.event;
     const eventId = req.params.id;
     const queryText = `UPDATE "events" 
