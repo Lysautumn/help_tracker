@@ -7,7 +7,6 @@ import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
 import Edit from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 import amber from '@material-ui/core/colors/amber';
-import red from '@material-ui/core/colors/red';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -34,10 +33,6 @@ const styles = {
     margin: '20px 10px 0px 0px',
     backgroundColor: teal[400],
   },
-  deleteButton: {
-    margin: '20px 0px 0px 10px',
-    backgroundColor: red[400],
-  }
 }
 
 class HistoryDetailsPage extends Component {

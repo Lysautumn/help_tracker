@@ -9,6 +9,11 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import grey from '@material-ui/core/colors/grey';
 import Button from '@material-ui/core/Button';
 import amber from '@material-ui/core/colors/amber';
@@ -34,6 +39,9 @@ const styles = {
   backButton: {
     backgroundColor: amber[400],
   },
+  yesButton: {
+    backgroundColor: teal[400],
+  },
   addButton: {
     margin: '20px 10px 0px 0px',
     backgroundColor: teal[400],
@@ -48,6 +56,7 @@ class EventEditPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      open: false,
       id: this.props.match.params.id,
       event: {
         date: '',
@@ -113,7 +122,27 @@ class EventEditPage extends Component {
     this.props.history.push('/user');
   }
 
-  handleDelete = () => {
+  handleOpen = () => {
+    this.setState({
+      open: true,
+    })
+  }
+
+  handleNoClose = () => {
+    this.setState({
+      open:false,
+    })
+  }
+ 
+  handleYesClose = () => {
+    this.setState({
+      open: false,
+    },
+    this.deleteEvent
+    )
+  }
+
+  deleteEvent = () => {
     this.props.dispatch({
       type: EVENT_ACTIONS.DELETE_EVENT,
       payload: this.state.id
@@ -182,7 +211,19 @@ class EventEditPage extends Component {
                 />
               </FormControl>
               <Button style={styles.addButton} variant="contained" onClick={this.handleSubmit}>Save</Button>
-              <Button style={styles.deleteButton} variant="contained" onClick={this.handleDelete}>Delete</Button>
+              <Button style={styles.deleteButton} variant="contained" onClick={this.handleOpen}>Delete</Button>
+              <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="deleteDialogTitle" aria-describedby="deleteConfimationText">
+                  <DialogTitle id="deleteDialogTitle">{"Are you sure?"}</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="deleteConfimationText">
+                      Are you sure you want to delete this entry? This is a permanent action.
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button style={styles.yesButton} onClick={this.handleYesClose}>Yes</Button>
+                    <Button style={styles.backButton} onClick={this.handleNoClose}>No</Button>
+                  </DialogActions>
+              </Dialog>
             </MuiThemeProvider>
           </form>
         </div>
