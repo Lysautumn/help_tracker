@@ -110,9 +110,9 @@ class HistoryDetailsPage extends Component {
                     <TableRow>
                         <TableCell>Cohort</TableCell>
                         <TableCell>Instructor</TableCell>
-                        <TableCell>Topics</TableCell>
-                        <TableCell>Assignments</TableCell>
                         <TableCell>Students</TableCell>
+                        <TableCell>Assignments</TableCell>
+                        <TableCell>Topics</TableCell>
                         <TableCell>Notes</TableCell>
                     </TableRow>
                 </TableHead>
@@ -120,9 +120,9 @@ class HistoryDetailsPage extends Component {
                     <TableRow key={event.id}>
                         <TableCell>{event.cohort_name}</TableCell>
                         <TableCell>{event.instructor}</TableCell>
-                        <TableCell>{event.topic}</TableCell>
-                        <TableCell>{event.assignment}</TableCell>
                         <TableCell>{event.students}</TableCell>
+                        <TableCell>{event.assignment}</TableCell>
+                        <TableCell>{event.topic}</TableCell>
                         <TableCell>{event.notes}</TableCell>
                     </TableRow>
             </TableBody>
