@@ -5,6 +5,7 @@ import { triggerLogin, formError, clearError } from '../../redux/actions/loginAc
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
 import grey from '@material-ui/core/colors/grey';
 import amber from '@material-ui/core/colors/amber';
 import teal from '@material-ui/core/colors/teal';
@@ -96,17 +97,17 @@ class LoginPage extends Component {
           <h1>Login</h1>
           <MuiThemeProvider theme={theme}>
             <FormControl fullWidth>
+              <InputLabel htmlFor="email">Email</InputLabel>
               <Input
                 type="text"
-                placeholder="Email"
                 value={this.state.email}
                 onChange={this.handleInputChangeFor('email')}
               />
             </FormControl>
             <FormControl fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
               <Input
                 type="password"
-                placeholder="Password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />

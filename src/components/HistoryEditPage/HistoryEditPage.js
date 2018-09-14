@@ -7,6 +7,7 @@ import { SELECT_ACTIONS } from '../../redux/actions/selectActions';
 import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import grey from '@material-ui/core/colors/grey';
@@ -128,15 +129,16 @@ class HistoryEditPage extends Component {
           <form className="form">
             <MuiThemeProvider theme={theme}>
               <FormControl fullWidth>
+                <InputLabel htmlFor="title">Title</InputLabel>
                 <Input
                   id="title"
-                  placeholder="Title"
                   type="text"
                   value={this.state.event.title}
                   onChange={this.handleChangeFor('title')}
                   />
               </FormControl>
               <FormControl fullWidth>
+                <InputLabel htmlFor="cohort">Cohort</InputLabel>
                 <Select renderValue={value => `${this.state.event.cohort}`} value={this.state.event.cohort} readOnly inputProps={{
                     name: 'Cohort',
                     id: 'cohort'
@@ -147,36 +149,36 @@ class HistoryEditPage extends Component {
                 </Select>
               </FormControl>
               <FormControl fullWidth>
+                <InputLabel htmlFor="students">Students</InputLabel>
                 <Input
                   id="students"
-                  placeholder="Students"
                   type="text"
                   value={this.state.event.students}
                   onChange={this.handleChangeFor('students')}
                 />
               </FormControl>
               <FormControl fullWidth>
+                <InputLabel htmlFor="assignment">Assignment</InputLabel>
                 <Input
                   id="assignment"
-                  placeholder="Assignment"
                   type="text"
                   value={this.state.event.assignment}
                   onChange={this.handleChangeFor('assignment')}
                 />
               </FormControl>
               <FormControl fullWidth>
+                <InputLabel htmlFor="topics">Topics</InputLabel>
                 <Input
                   id="topics"
-                  placeholder="Topics"
                   type="text"
                   value={this.state.event.topics}
                   onChange={this.handleChangeFor('topics')}
                 />
               </FormControl>
               <FormControl fullWidth>
+                <InputLabel htmlFor="notes">Notes</InputLabel>
                 <Input
                   id="notes"
-                  placeholder="Notes"
                   type="text"
                   value={this.state.event.notes}
                   onChange={this.handleChangeFor('notes')}

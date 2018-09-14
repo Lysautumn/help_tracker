@@ -123,9 +123,9 @@ class AddPage extends Component {
                 />
               </FormControl>
               <FormControl fullWidth>
+                <InputLabel htmlFor="title">Title</InputLabel>
                 <Input
                   id="title"
-                  placeholder="Title"
                   type="text"
                   value={this.state.newEvent.title}
                   onChange={this.handleChangeFor('title')}
@@ -143,27 +143,27 @@ class AddPage extends Component {
                 </Select>
               </FormControl>
               <FormControl fullWidth>
+                <InputLabel htmlFor="students">Students</InputLabel>
                 <Input
                   id="students"
-                  placeholder="Students"
                   type="text"
                   value={this.state.newEvent.students}
                   onChange={this.handleChangeFor('students')}
                 />
               </FormControl>
               <FormControl fullWidth>
+                <InputLabel htmlFor="assignment">Assignment</InputLabel>
                 <Input
                   id="assignment"
-                  placeholder="Assignment"
                   type="text"
                   value={this.state.newEvent.assignment}
                   onChange={this.handleChangeFor('assignment')}
                 />
               </FormControl>
               <FormControl fullWidth>
+                <InputLabel htmlFor="topics">Topics</InputLabel>
                 <Input
                   id="topics"
-                  placeholder="Topics"
                   type="text"
                   value={this.state.newEvent.topics}
                   onChange={this.handleChangeFor('topics')}
