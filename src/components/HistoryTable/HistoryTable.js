@@ -3,6 +3,7 @@ import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
@@ -106,6 +107,17 @@ class HistoryTable extends Component {
       <div className="contentContainer">
         <h2>History</h2>
         <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Students</TableCell>
+              <TableCell>Instructor</TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
           <TableBody>
           {this.props.event.eventList && this.props.event.eventList.eventName.map( (event) => {
             if (event.completed === true) {

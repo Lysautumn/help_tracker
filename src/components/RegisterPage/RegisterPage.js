@@ -106,7 +106,7 @@ class RegisterPage extends Component {
             <FormControl fullWidth>
               <Input
                 type="text"
-                placeholder="Name"
+                placeholder="First Name"
                 value={this.state.name}
                 onChange={this.handleInputChangeFor('name')}
               />
