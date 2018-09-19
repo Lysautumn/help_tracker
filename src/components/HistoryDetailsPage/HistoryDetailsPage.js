@@ -7,6 +7,7 @@ import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
 import Edit from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 import amber from '@material-ui/core/colors/amber';
+import blueGrey from '@material-ui/core/colors/blueGrey';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -26,8 +27,12 @@ const styles = {
     backgroundColor: amber[400],
   },
   editButton: {
-    backgroundColor: amber[400],
-    marginLeft: '10px',
+    backgroundColor: blueGrey[50],
+    marginLeft: '20px',
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'black',
   },
   addButton: {
     margin: '20px 10px 0px 0px',
