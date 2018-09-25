@@ -21,10 +21,18 @@ router.post('/register', (req, res, next) => {
   const password = encryptLib.encryptPassword(req.body.password);
   const name = req.body.name;
 
-  const queryText = 'INSERT INTO person (name, email, password) VALUES ($1, $2, $3) RETURNING id';
-  pool.query(queryText, [name, email, password])
-    .then(() => { res.sendStatus(201); })
-    .catch((err) => { next(err); });
+  let validEmail = email.includes('@primeacademy.io');
+
+  if (validEmail) {
+    const queryText = 'INSERT INTO person (name, email, password) VALUES ($1, $2, $3) RETURNING id';
+    pool.query(queryText, [name, email, password])
+      .then(() => { res.sendStatus(201); })
+      .catch((err) => { next(err); });
+  } else {
+    next(err);
+  }
+
+
 });
 
 // Handles login form authenticate/login POST
