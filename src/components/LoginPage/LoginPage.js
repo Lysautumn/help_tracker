@@ -108,7 +108,7 @@ class LoginPage extends Component {
               />
             </FormControl>
             <Button style={styles.loginButton} variant="contained" type="submit" onClick={this.login}>Log In</Button>
-            <Button style={styles.registerButton} variant="contained" type="submit"><Link style={styles.link} to="/register">Register</Link></Button>
+            {/* <Button style={styles.registerButton} variant="contained" type="submit"><Link style={styles.link} to="/register">Register</Link></Button> */}
             
           </MuiThemeProvider>
         </form>

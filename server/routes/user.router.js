@@ -15,25 +15,25 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {
+// router.post('/register', (req, res, next) => {
   
-  const email = req.body.email;
-  const password = encryptLib.encryptPassword(req.body.password);
-  const name = req.body.name;
+//   const email = req.body.email;
+//   const password = encryptLib.encryptPassword(req.body.password);
+//   const name = req.body.name;
 
-  let validEmail = email.includes('@primeacademy.io');
+//   let validEmail = email.includes('@primeacademy.io');
 
-  if (validEmail) {
-    const queryText = 'INSERT INTO person (name, email, password) VALUES ($1, $2, $3) RETURNING id';
-    pool.query(queryText, [name, email, password])
-      .then(() => { res.sendStatus(201); })
-      .catch((err) => { next(err); });
-  } else {
-    next(err);
-  }
+//   if (validEmail) {
+//     const queryText = 'INSERT INTO person (name, email, password) VALUES ($1, $2, $3) RETURNING id';
+//     pool.query(queryText, [name, email, password])
+//       .then(() => { res.sendStatus(201); })
+//       .catch((err) => { next(err); });
+//   } else {
+//     next(err);
+//   }
 
 
-});
+// });
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
