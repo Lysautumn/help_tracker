@@ -2,24 +2,10 @@ import React, { Component } from 'react';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
-import Delete from '@material-ui/icons/Delete';
-import More from '@material-ui/icons/More';
-import red from '@material-ui/core/colors/red';
-import blueGrey from '@material-ui/core/colors/blueGrey';
-import amber from '@material-ui/core/colors/amber';
-import teal from '@material-ui/core/colors/teal';
-// import DeleteButton from '../DeleteButton/DeleteButton';
+import { Table, TableHead, TableBody, TableCell, TableRow, Dialog, DialogActions, DialogContent,
+  DialogContentText, DialogTitle, Button } from '@material-ui/core';
+import { Delete, More } from '@material-ui/icons';
+import { red, blueGrey, amber, teal } from '@material-ui/core/colors';
 import { EVENT_ACTIONS, triggerGet } from '../../redux/actions/eventActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 

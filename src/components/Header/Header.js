@@ -4,11 +4,9 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 import './Header.css';
 import logo from './logo.png';
-import Avatar from '@material-ui/core/Avatar';
+import { Avatar, Menu, MenuItem } from '@material-ui/core';
 import Face from '@material-ui/icons/Face';
 import teal from '@material-ui/core/colors/teal';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const styles = {
   tealAvatar: {

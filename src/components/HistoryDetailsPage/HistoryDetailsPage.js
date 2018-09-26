@@ -4,17 +4,9 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
-import Edit from '@material-ui/icons/Edit';
-import Button from '@material-ui/core/Button';
-import amber from '@material-ui/core/colors/amber';
-import blueGrey from '@material-ui/core/colors/blueGrey';
-import ArrowBack from '@material-ui/icons/ArrowBack';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import teal from '@material-ui/core/colors/teal';
+import { Edit, ArrowBack } from '@material-ui/icons';
+import { Button, Table, TableHead, TableBody, TableCell, TableRow } from '@material-ui/core';
+import { amber, blueGrey, teal } from '@material-ui/core/colors';
 
 const mapStateToProps = state => ({
   user: state.user,

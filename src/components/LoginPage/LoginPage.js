@@ -3,13 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import grey from '@material-ui/core/colors/grey';
-import amber from '@material-ui/core/colors/amber';
-import teal from '@material-ui/core/colors/teal';
-import Button from '@material-ui/core/Button';
+import { FormControl, Input, InputLabel, Button } from '@material-ui/core';
+import { amber, teal, grey } from '@material-ui/core/colors';
 import './LoginPage.css';
 
 const mapStateToProps = state => ({

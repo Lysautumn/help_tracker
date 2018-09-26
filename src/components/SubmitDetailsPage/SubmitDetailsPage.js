@@ -5,16 +5,9 @@ import Moment from 'react-moment';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { SELECT_ACTIONS } from '../../redux/actions/selectActions';
 import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import grey from '@material-ui/core/colors/grey';
-import Button from '@material-ui/core/Button';
-import amber from '@material-ui/core/colors/amber';
+import { FormControl, Input, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
+import { grey, amber, teal } from '@material-ui/core/colors';
 import ArrowBack from '@material-ui/icons/ArrowBack';
-import teal from '@material-ui/core/colors/teal';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const mapStateToProps = state => ({

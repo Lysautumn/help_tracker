@@ -6,9 +6,7 @@ import HistoryTable from '../HistoryTable/HistoryTable';
 import UpcomingTable from '../UpcomingTable/UpcomingTable';
 import Button from '@material-ui/core/Button';
 import Add from '@material-ui/icons/Add';
-import amber from '@material-ui/core/colors/amber';
-import grey from '@material-ui/core/colors/grey';
-
+import { amber, grey } from '@material-ui/core/colors';
 import { triggerGet } from '../../redux/actions/eventActions';
 
 
