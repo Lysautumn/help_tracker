@@ -1,6 +1,6 @@
-# Who Showed Up
+# Help Tracker
 
-Who Showed Up is a full stack application intended to be used by faculty of Prime Digital Academy. It will be used to track students who attend help sessions outside of class hours and what was covered at the session.
+Help Tracker is a full stack application intended to be used by faculty of Prime Digital Academy. It will be used to track students who attend help sessions outside of class hours and what was covered at the session.
 
 ## Getting Started
 
