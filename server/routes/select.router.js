@@ -21,7 +21,16 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/cohorts', (req, res) => {
+    let newCohortName = req.body.newCohort;
+    let queryText = `INSERT INTO cohorts (cohort_name) VALUES ($1)`;
+    pool.query(queryText, [newCohortName])
+        .then(result => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log(error);
+            res.sendStatus(500);
+        })
 
 });
 

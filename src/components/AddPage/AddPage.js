@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { EVENT_ACTIONS } from '../../redux/actions/eventActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { SELECT_ACTIONS } from '../../redux/actions/selectActions';
-import { TextField, FormControl, InputLabel, Input, Select, MenuItem, Button } from '@material-ui/core';
+import { TextField, FormControl, InputLabel, Input, Select, MenuItem, Button, Dialog, DialogTitle, 
+  DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import { grey, amber, teal } from '@material-ui/core/colors';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -28,6 +29,9 @@ const styles = {
   addButton: {
     margin: '20px 0px 0px 0px',
     backgroundColor: teal[400],
+  },
+  addCohortButton: {
+    backgroundColor: teal[400],
   }
 }
 
@@ -44,6 +48,8 @@ class AddPage extends Component {
         assignment: '',
         topics: '',
       },
+      open: false,
+      newCohort: '',
     };
   }
 
@@ -87,6 +93,40 @@ class AddPage extends Component {
     this.props.dispatch({type:EVENT_ACTIONS.CREATE_EVENT, payload: this.state.newEvent});
     this.props.history.push('/user');
   }
+
+  handleOpen = () => {
+    this.setState({
+      open: true,
+    })
+  }
+
+  handleCohort = event => {
+    this.setState({
+      newCohort: event.target.value
+    })
+  }
+
+  handleAddCohort = () => {
+    this.setState({
+      open: false,
+    },
+    this.postCohort
+    )
+  }
+
+  postCohort = () => {
+    this.props.dispatch({type: SELECT_ACTIONS.CREATE_COHORT, payload: {newCohort: this.state.newCohort}});
+    this.setState({
+      newCohort: '',
+    })
+  }
+
+  handleCancel = () => {
+    this.setState({
+      open: false,
+    })
+  }
+
 
   render() {
     
@@ -134,6 +174,9 @@ class AddPage extends Component {
                   })}
                 </Select>
               </FormControl>
+              <Button style={styles.addButton} onClick={() => this.handleOpen()}>
+                  Add New Cohort
+              </Button>
               <FormControl fullWidth>
                 <InputLabel htmlFor="students">Students</InputLabel>
                 <Input
@@ -164,6 +207,28 @@ class AddPage extends Component {
               <Button style={styles.addButton} variant="contained" type="submit" onClick={this.handleSubmit}>Add</Button>
             </MuiThemeProvider>
           </form>
+          <Dialog open={this.state.open} aria-labelledby="newCohortDialog" aria-describedby="addNewCohort">
+            <DialogTitle id="newCohortDialog">{"Add New Cohort"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="addNewCohort">
+                  Enter the name of the new cohort:
+                </DialogContentText>
+                <FormControl fullWidth>
+                  <InputLabel htmlFor="newCohortName">Cohort Name</InputLabel>
+                  <Input
+                    id="newCohortName"
+                    type="text"
+                    label="Cohort Name"
+                    value={this.state.newCohort}
+                    onChange={this.handleCohort}
+                  />
+                </FormControl>
+              </DialogContent>
+              <DialogActions>
+                <Button style={styles.addCohortButton} onClick={this.handleAddCohort}>Add</Button>
+                <Button style={styles.backButton} onClick={this.handleCancel}>Cancel</Button>
+              </DialogActions>
+          </Dialog>
         </div>
       );
     }
