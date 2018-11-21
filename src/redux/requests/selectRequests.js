@@ -11,3 +11,11 @@ export function callGetSelects() {
             throw error.response || error;
         });
 }
+
+export function callCreateNewCohort(cohort) {
+    return axios.post('select/cohorts', cohort)
+        .then(response => response.data)
+        .catch(error => {
+            throw error.response || error;
+        })
+}
