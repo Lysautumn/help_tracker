@@ -99,6 +99,8 @@ class HistoryTable extends Component {
               <TableCell>Title</TableCell>
               <TableCell>Students</TableCell>
               <TableCell>Instructor</TableCell>
+              <TableCell>Cohort</TableCell>
+              <TableCell>Topics</TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
@@ -113,6 +115,8 @@ class HistoryTable extends Component {
                   <TableCell>{event.title}</TableCell>
                   <TableCell>{event.students}</TableCell>
                   <TableCell>{event.instructor}</TableCell>
+                  <TableCell>{event.cohort_name}</TableCell>
+                  <TableCell>{event.topic}</TableCell>
                   <TableCell></TableCell>
                   <TableCell><Link style={styles.link} to={`/historyDetail/${event.id}`}><Button style={styles.moreButton}><More /></Button></Link></TableCell>
                   <TableCell><Button style={styles.deleteButton} onClick={() => this.handleDelete(event)}><Delete /></Button></TableCell>
