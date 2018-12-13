@@ -10,7 +10,7 @@ router.get('/all', (req, res) => {
 	FROM "events"
 	JOIN "person" on person.id = events.instructor_id
     JOIN "cohorts" on cohorts.id = events.cohort_id
-    ORDER BY date`;
+    ORDER BY date DESC`;
     pool.query(queryText)
         .then(result => {
             res.send(result.rows);
