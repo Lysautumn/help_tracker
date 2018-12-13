@@ -31,6 +31,9 @@ const styles = {
   yesButton: {
     backgroundColor: teal[400],
   },
+  table: {
+    width: '800px'
+  },
 }
 
 class HistoryTable extends Component {
@@ -110,7 +113,7 @@ class HistoryTable extends Component {
     return (
       <div className="contentContainer">
         <h2>History</h2>
-        <Table>
+        <Table style={styles.table}>
           <TableHead>
             <TableRow>
               <TableCell>Date</TableCell>
@@ -119,7 +122,6 @@ class HistoryTable extends Component {
               <TableCell>Instructor</TableCell>
               <TableCell>Cohort</TableCell>
               <TableCell>Topics</TableCell>
-              <TableCell></TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
             </TableRow>
@@ -135,7 +137,6 @@ class HistoryTable extends Component {
                   <TableCell>{event.instructor}</TableCell>
                   <TableCell>{event.cohort_name}</TableCell>
                   <TableCell>{event.topic}</TableCell>
-                  <TableCell></TableCell>
                   <TableCell><Link style={styles.link} to={`/historyDetail/${event.id}`}><Button style={styles.moreButton}><More /></Button></Link></TableCell>
                   <TableCell><Button style={styles.deleteButton} onClick={() => this.handleDelete(event)}><Delete /></Button></TableCell>
                 </TableRow>
@@ -149,7 +150,7 @@ class HistoryTable extends Component {
             {this.props.event.isLoading === false &&
             <TableRow>
               <TablePagination
-                colSpan={9}
+                colSpan={8}
                 rowsPerPageOptions={[5, 10, 25]}
                 count={this.props.event.eventList.eventName.length}
                 rowsPerPage={this.state.rowsPerPage}
