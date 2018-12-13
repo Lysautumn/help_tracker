@@ -103,6 +103,8 @@ class UpcomingTable extends Component {
               <TableCell>Title</TableCell>
               <TableCell>Students</TableCell>
               <TableCell>Instructor</TableCell>
+              <TableCell>Cohort</TableCell>
+              <TableCell>Topics</TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
@@ -117,6 +119,8 @@ class UpcomingTable extends Component {
                   <TableCell>{event.title}</TableCell>
                   <TableCell>{event.students}</TableCell>
                   <TableCell>{event.instructor}</TableCell>
+                  <TableCell>{event.cohort_name}</TableCell>
+                  <TableCell>{event.topic}</TableCell>
                   <TableCell><Link style={styles.link} to={`/editEvent/${event.id}`}><Button style={styles.moreButton}><Edit /></Button></Link></TableCell>
                   <TableCell><Link style={styles.link} to={`/submitEvent/${event.id}`}><Button style={styles.checkButton}><Check /></Button></Link></TableCell>
                   <TableCell><Button style={styles.deleteButton} onClick={() => this.handleDelete(event)}><Delete /></Button></TableCell>
