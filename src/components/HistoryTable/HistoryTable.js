@@ -50,13 +50,20 @@ class HistoryTable extends Component {
 
   handleBackButtonClick = event => {
     this.onChangePage(event, this.state.page - 1);
-  };
+  }
+
   handleNextButtonClick = event => {
     this.onChangePage(event, this.state.page + 1);
-  };
+  }
 
   handleChangePage = (event, page) => {
     this.setState({ page });
+  }
+
+  handleChangeRowsPerPage = event => {
+    this.setState({
+      rowsPerPage: event.target.value,
+    });
   }
 
   handleOpen = () => {
@@ -118,7 +125,7 @@ class HistoryTable extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-          {this.props.event.eventList && this.props.event.eventList.eventName.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map( (event) => {
+          {this.props.event.eventList && this.props.event.eventList.eventName.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage + 1).map( (event) => {
             if (event.completed === true) {
               return ( 
                 <TableRow key={event.id}>
@@ -142,11 +149,13 @@ class HistoryTable extends Component {
             {this.props.event.isLoading === false &&
             <TableRow>
               <TablePagination
-                colSpan={3}
+                colSpan={9}
+                rowsPerPageOptions={[5, 10, 25]}
                 count={this.props.event.eventList.eventName.length}
                 rowsPerPage={this.state.rowsPerPage}
                 page={this.state.page}
                 onChangePage={this.handleChangePage}
+                onChangeRowsPerPage={this.handleChangeRowsPerPage}
               ></TablePagination>
             </TableRow>
             }
