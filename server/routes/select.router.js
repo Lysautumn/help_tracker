@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
  */
 router.post('/cohorts', (req, res) => {
     let newCohortName = req.body.newCohort;
-    let queryText = `INSERT INTO cohorts (cohort_name) VALUES ($1)`;
+    let queryText = `INSERT INTO "cohorts" (cohort_name) VALUES ($1)`;
     pool.query(queryText, [newCohortName])
         .then(result => {
             res.sendStatus(200);
