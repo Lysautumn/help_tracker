@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Table, TableHead, TableBody, TableCell, TableRow, Dialog, DialogActions, DialogContent,
+import { Table, TableHead, TableBody, TableCell, TableRow, TableFooter, TablePagination, Dialog, DialogActions, DialogContent,
   DialogContentText, DialogTitle, Button } from '@material-ui/core';
 import { Delete, More } from '@material-ui/icons';
 import { red, blueGrey, amber, teal } from '@material-ui/core/colors';
@@ -31,9 +31,10 @@ const styles = {
   yesButton: {
     backgroundColor: teal[400],
   },
+  table: {
+    width: '800px'
+  },
 }
-
-
 
 class HistoryTable extends Component {
   constructor(props) {
@@ -42,10 +43,30 @@ class HistoryTable extends Component {
       open: false,
       toDelete: false,
       eventToDelete: '',
+      page: 0,
+      rowsPerPage: 10,
     }
   }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+  }
+
+  handleBackButtonClick = event => {
+    this.onChangePage(event, this.state.page - 1);
+  }
+
+  handleNextButtonClick = event => {
+    this.onChangePage(event, this.state.page + 1);
+  }
+
+  handleChangePage = (event, page) => {
+    this.setState({ page });
+  }
+
+  handleChangeRowsPerPage = event => {
+    this.setState({
+      rowsPerPage: event.target.value,
+    });
   }
 
   handleOpen = () => {
@@ -92,7 +113,7 @@ class HistoryTable extends Component {
     return (
       <div className="contentContainer">
         <h2>History</h2>
-        <Table>
+        <Table style={styles.table}>
           <TableHead>
             <TableRow>
               <TableCell>Date</TableCell>
@@ -103,11 +124,10 @@ class HistoryTable extends Component {
               <TableCell>Topics</TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
-              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-          {this.props.event.eventList && this.props.event.eventList.eventName.map( (event) => {
+          {this.props.event.eventList && this.props.event.eventList.eventName.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage + 1).map( (event) => {
             if (event.completed === true) {
               return ( 
                 <TableRow key={event.id}>
@@ -117,7 +137,6 @@ class HistoryTable extends Component {
                   <TableCell>{event.instructor}</TableCell>
                   <TableCell>{event.cohort_name}</TableCell>
                   <TableCell>{event.topic}</TableCell>
-                  <TableCell></TableCell>
                   <TableCell><Link style={styles.link} to={`/historyDetail/${event.id}`}><Button style={styles.moreButton}><More /></Button></Link></TableCell>
                   <TableCell><Button style={styles.deleteButton} onClick={() => this.handleDelete(event)}><Delete /></Button></TableCell>
                 </TableRow>
@@ -127,6 +146,21 @@ class HistoryTable extends Component {
             }
             })}
           </TableBody>
+          <TableFooter>
+            {this.props.event.isLoading === false &&
+            <TableRow>
+              <TablePagination
+                colSpan={8}
+                rowsPerPageOptions={[5, 10, 25]}
+                count={this.props.event.eventList.eventName.length}
+                rowsPerPage={this.state.rowsPerPage}
+                page={this.state.page}
+                onChangePage={this.handleChangePage}
+                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+              ></TablePagination>
+            </TableRow>
+            }
+          </TableFooter>
         </Table>
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="deleteDialogTitle" aria-describedby="deleteConfimationText">
           <DialogTitle id="deleteDialogTitle">{"Are you sure?"}</DialogTitle>
