@@ -12,6 +12,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 const mapStateToProps = state => ({
   user: state.user,
   event: state.event,
+  history: state.history,
 });
 
 const styles = {
@@ -49,14 +50,6 @@ class HistoryTable extends Component {
   }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-  }
-
-  handleBackButtonClick = event => {
-    this.onChangePage(event, this.state.page - 1);
-  }
-
-  handleNextButtonClick = event => {
-    this.onChangePage(event, this.state.page + 1);
   }
 
   handleChangePage = (event, page) => {
@@ -127,7 +120,7 @@ class HistoryTable extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-          {this.props.event.eventList && this.props.event.eventList.eventName.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage + 1).map( (event) => {
+          {this.props.history.eventList && this.props.history.eventList.eventName.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map( (event) => {
             if (event.completed === true) {
               return ( 
                 <TableRow key={event.id}>
@@ -147,12 +140,12 @@ class HistoryTable extends Component {
             })}
           </TableBody>
           <TableFooter>
-            {this.props.event.isLoading === false &&
+            {this.props.history.isLoading === false &&
             <TableRow>
               <TablePagination
                 colSpan={8}
                 rowsPerPageOptions={[5, 10, 25]}
-                count={this.props.event.eventList.eventName.length}
+                count={this.props.history.eventList.eventName.length}
                 rowsPerPage={this.state.rowsPerPage}
                 page={this.state.page}
                 onChangePage={this.handleChangePage}
