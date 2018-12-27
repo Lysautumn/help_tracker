@@ -120,7 +120,7 @@ class HistoryTable extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-          {this.props.history.eventList && this.props.history.eventList.eventName.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage + 1).map( (event) => {
+          {this.props.history.eventList && this.props.history.eventList.eventName.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map( (event) => {
             if (event.completed === true) {
               return ( 
                 <TableRow key={event.id}>
