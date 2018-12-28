@@ -46,6 +46,7 @@ class HistoryTable extends Component {
       eventToDelete: '',
       page: 0,
       rowsPerPage: 10,
+      filteredEvents: [],
     }
   }
   componentDidMount() {
@@ -105,6 +106,7 @@ class HistoryTable extends Component {
 
     return (
       <div className="contentContainer">
+      {this.state.filteredEvents}
         <h2>History</h2>
         <Table style={styles.table}>
           <TableHead>
@@ -121,7 +123,6 @@ class HistoryTable extends Component {
           </TableHead>
           <TableBody>
           {this.props.history.eventList && this.props.history.eventList.eventName.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map( (event) => {
-            if (event.completed === true) {
               return ( 
                 <TableRow key={event.id}>
                   <TableCell><Moment format="MM/DD/YYYY">{event.date}</Moment></TableCell>
@@ -134,9 +135,6 @@ class HistoryTable extends Component {
                   <TableCell><Button style={styles.deleteButton} onClick={() => this.handleDelete(event)}><Delete /></Button></TableCell>
                 </TableRow>
               )
-            } else {
-              return null;
-            }
             })}
           </TableBody>
           <TableFooter>

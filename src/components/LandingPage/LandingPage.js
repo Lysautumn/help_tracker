@@ -28,12 +28,14 @@ class LandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      greetings: ['Hello', 'Hey', 'Ahoy', 'Greetings', 'Bonjour', 'Hey There', 'Hola', 'Aloha']
+      greetings: ['Hello', 'Hey', 'Ahoy', 'Greetings', 'Bonjour', 'Hey There', 'Hola', 'Aloha'],
+    
     };
   }
 
   componentDidMount() {
     this.props.dispatch(triggerGet());
+
   }
 
   componentDidUpdate() {
