@@ -140,7 +140,7 @@ class HistoryTable extends Component {
             })}
           </TableBody>
           <TableFooter>
-            {this.props.history.isLoading === false &&
+            {this.props.history.eventList && this.props.history.isLoading === false &&
             <TableRow>
               <TablePagination
                 colSpan={8}
