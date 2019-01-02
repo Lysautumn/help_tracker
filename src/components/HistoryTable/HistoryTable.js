@@ -3,7 +3,7 @@ import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Table, TableHead, TableBody, TableCell, TableRow, TableFooter, TablePagination, Dialog, DialogActions, DialogContent,
-  DialogContentText, DialogTitle, Button } from '@material-ui/core';
+  DialogContentText, DialogTitle, Button, FormControl, InputLabel, Input } from '@material-ui/core';
 import { Delete, More } from '@material-ui/icons';
 import { red, blueGrey, amber, teal } from '@material-ui/core/colors';
 import { EVENT_ACTIONS, triggerGet } from '../../redux/actions/eventActions';
@@ -46,6 +46,7 @@ class HistoryTable extends Component {
       eventToDelete: '',
       page: 0,
       rowsPerPage: 10,
+      filterString: '',
     }
   }
   componentDidMount() {
@@ -101,11 +102,40 @@ class HistoryTable extends Component {
     })
   }
 
-  render() {
+  handleFilterString = event => {
+    console.log('value', event.target.value);
+    this.setState({
+      filterString: event.target.value,
+    }) 
+  }
 
+  render() {
+    let listCheck = this.props.history.eventList;
+
+    let historyList;
+
+    if (listCheck && this.state.filterString) {
+      historyList = this.props.history.eventList.eventName.filter(event => {
+        return event.students.toLowerCase().includes(this.state.filterString.toLowerCase());
+      });
+    } else if (listCheck) {
+      historyList = this.props.history.eventList.eventName.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage);
+    }
+    
+    
     return (
       <div className="contentContainer">
         <h2>History</h2>
+        <FormControl fullWidth>
+          <InputLabel htmlFor="filter">Filter</InputLabel>
+          <Input
+            id="filter"
+            type="text"
+            value={this.state.filterString}
+            onChange={this.handleFilterString}
+          />
+        </FormControl>
+
         <Table style={styles.table}>
           <TableHead>
             <TableRow>
@@ -120,8 +150,7 @@ class HistoryTable extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-          {this.props.history.eventList && this.props.history.eventList.eventName.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map( (event) => {
-            if (event.completed === true) {
+          {listCheck && historyList.map( (event) => {
               return ( 
                 <TableRow key={event.id}>
                   <TableCell><Moment format="MM/DD/YYYY">{event.date}</Moment></TableCell>
@@ -134,9 +163,6 @@ class HistoryTable extends Component {
                   <TableCell><Button style={styles.deleteButton} onClick={() => this.handleDelete(event)}><Delete /></Button></TableCell>
                 </TableRow>
               )
-            } else {
-              return null;
-            }
             })}
           </TableBody>
           <TableFooter>
