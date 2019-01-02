@@ -126,7 +126,7 @@ class HistoryTable extends Component {
     return (
       <div className="contentContainer">
         <h2>History</h2>
-        <FormControl fullWidth>
+        <FormControl>
           <InputLabel htmlFor="filter">Filter</InputLabel>
           <Input
             id="filter"
